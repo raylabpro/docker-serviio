@@ -15,6 +15,7 @@ WORKDIR /tmp/ffmpeg
 # Prepare APK CDNs
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repositories; \
     echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/main" >> /etc/apk/repositories; \
+    apk update
 
 # Install Dependencies
 RUN apk add --update build-base curl nasm tar bzip2 \
