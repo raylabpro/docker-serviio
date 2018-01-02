@@ -8,7 +8,7 @@ FROM openjdk:8-jre-alpine AS serviio
 MAINTAINER Riftbit ErgoZ <ergozru@riftbit.com>
 
 ARG SERVIIO_VERSION=1.9
-ARG FFMPEG_VERSION=3.4
+ARG FFMPEG_VERSION=3.4.1
 
 WORKDIR /tmp/ffmpeg
 
@@ -26,7 +26,7 @@ RUN apk add --update build-base curl nasm tar bzip2 fdk-aac \
   libvpx-dev libvorbis-dev x265-dev freetype-dev fdk-aac-dev pkgconf pkgconf-dev \
   libass-dev libwebp-dev rtmpdump-dev libtheora-dev opus-dev xvidcore-dev xvidcore
 
-# Build ffmpeg and serviio
+# Build ffmpeg
 RUN DIR=$(mktemp -d) && cd ${DIR} && \
   curl -s http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxvf - -C . && \
   cd ffmpeg-${FFMPEG_VERSION} && \
@@ -38,13 +38,17 @@ RUN DIR=$(mktemp -d) && cd ${DIR} && \
   make && \
   make install && \
   make distclean && \
-  cd ${DIR} && \
+  rm -rf ${DIR} && \
+  apk del build-base nasm && rm -rf /var/cache/apk/*
+
+
+# Install Serviio
+RUN DIR=$(mktemp -d) && cd ${DIR} && \
   curl -s http://download.serviio.org/releases/serviio-${SERVIIO_VERSION}-linux.tar.gz | tar zxvf - -C . && \
-  mv serviio-${SERVIIO_VERSION} /opt/serviio && \
+  mv ./serviio-${SERVIIO_VERSION} /opt/serviio && \
   chmod +x /opt/serviio/bin/serviio.sh && \
   rm -rf ${DIR} && \
-  apk del build-base curl tar bzip2 x264 openssl nasm && rm -rf /var/cache/apk/*
-
+  
 WORKDIR /opt/serviio
 
 VOLUME ["/opt/serviio/library", "/opt/serviio/plugins", "/opt/serviio/log"]
