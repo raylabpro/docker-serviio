@@ -18,9 +18,9 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repos
     apk update
 
 # Install Dependencies
-RUN apk add --update build-base curl nasm tar bzip2 \
-  zlib-dev yasm-dev lame-dev libogg-dev x264-dev lame-dev \
-  libvpx-dev libvorbis-dev x265-dev freetype-dev fdk-aac-dev \
+RUN apk add --update build-base curl nasm tar bzip2 fdk-aac \
+  zlib-dev yasm-dev lame-dev libogg-dev x264-dev lame-dev musl musl-dev \
+  libvpx-dev libvorbis-dev x265-dev freetype-dev fdk-aac-dev pkgconf pkgconf-dev \
   libass-dev libwebp-dev rtmpdump-dev libtheora-dev opus-dev xvidcore-dev xvidcore
 
 # Build ffmpeg and serviio
