@@ -34,7 +34,7 @@ RUN DIR=$(mktemp -d) && cd ${DIR} && \
   --enable-version3 --enable-gpl --enable-libfdk-aac --enable-nonfree --enable-small --enable-libmp3lame \
   --enable-libx264 --enable-libx265 --enable-libvpx --enable-libtheora --enable-libvorbis \
   --enable-libopus --enable-libass --enable-libwebp --enable-librtmp --enable-postproc --enable-libxvid \
-  --enable-avresample --enable-libfreetype  --enable-libopencore-amrnb --enable-libopencore-amrwb --disable-debug && \
+  --enable-avresample --enable-libfreetype --disable-debug && \
   make && \
   make install && \
   make distclean && \
