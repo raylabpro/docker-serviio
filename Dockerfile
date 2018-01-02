@@ -1,3 +1,9 @@
+# Serviio docker
+#
+# VERSION               0.1
+# Run with: docker run --rm --name serviio -d -p 23423:23423/tcp -p 8895:8895/tcp -p 1900:1900/udp riftbit/docker-serviio
+# or        docker run --rm --name serviio -t -i -p 23423:23423/tcp -p 8895:8895/tcp -p 1900:1900/udp riftbit/docker-serviio
+
 FROM openjdk:8-jre-alpine AS serviio
 MAINTAINER Riftbit ErgoZ <ergozru@riftbit.com>
 
