@@ -45,13 +45,14 @@ RUN DIR=$(mktemp -d) && cd ${DIR} && \
 # Install Serviio
 RUN DIR=$(mktemp -d) && cd ${DIR} && \
   curl -s http://download.serviio.org/releases/serviio-${SERVIIO_VERSION}-linux.tar.gz | tar zxvf - -C . && \
+  mkdir /opt/serviio && \
   mv ./serviio-${SERVIIO_VERSION} /opt/serviio && \
   chmod +x /opt/serviio/bin/serviio.sh && \
   rm -rf ${DIR} && \
   
 WORKDIR /opt/serviio
 
-VOLUME ["/opt/serviio/library", "/opt/serviio/plugins", "/opt/serviio/log"]
+VOLUME ["/opt/serviio/library", "/opt/serviio/plugins", "/opt/serviio/log", "/media"]
 
 EXPOSE ["23423:23423/tcp", "8895:8895/tcp", "1900:1900/udp"]
 
