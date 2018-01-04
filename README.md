@@ -4,7 +4,7 @@
 
 ```
 ARG SERVIIO_VERSION=1.9
-ARG FFMPEG_VERSION=3.4
+ARG FFMPEG_VERSION=3.4.1
 ```
 
 ### Exposed Ports
@@ -14,5 +14,7 @@ ARG FFMPEG_VERSION=3.4
 8895:8895/tcp
 1900:1900/udp
 ```
+
+dcraw not supported at this moment.
 
 https://hub.docker.com/r/riftbit/docker-serviio/
