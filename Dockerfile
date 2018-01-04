@@ -19,10 +19,10 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repos
         libvpx-dev libvorbis-dev x265-dev freetype-dev fdk-aac-dev pkgconf pkgconf-dev libxcb \
         libass-dev libwebp-dev rtmpdump-dev libtheora-dev opus-dev xvidcore-dev xvidcore libxcb-dev
 
-ARG SERVIIO_VERSION=1.9
+
 ARG FFMPEG_VERSION=3.4.1
 
-# Build ffmpeg and Serviio
+# Build ffmpeg 
 RUN DIR=$(mktemp -d) && cd ${DIR} && \
   curl -s http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxf - -C . && \
   cd ffmpeg-${FFMPEG_VERSION} && \
@@ -35,7 +35,11 @@ RUN DIR=$(mktemp -d) && cd ${DIR} && \
   make install && \
   make distclean && \
   apk del build-base nasm && rm -rf /var/cache/apk/* && \
-  cd ${DIR} && \
+
+ARG SERVIIO_VERSION=1.9
+
+# Build Serviio
+RUN cd ${DIR} && \
   curl -s http://download.serviio.org/releases/serviio-${SERVIIO_VERSION}-linux.tar.gz | tar zxvf - -C . && \
   mkdir -p /opt/serviio && \
   mkdir -p /media/serviio && \
