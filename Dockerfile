@@ -24,7 +24,7 @@ ARG FFMPEG_VERSION=3.4.1
 
 # Build ffmpeg and Serviio
 RUN DIR=$(mktemp -d) && cd ${DIR} && \
-  curl -s http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxvf - -C . && \
+  curl -s http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxf - -C . && \
   cd ffmpeg-${FFMPEG_VERSION} && \
   ./configure --disable-doc \
   --enable-version3 --enable-gpl --enable-libfdk-aac --enable-nonfree --enable-libmp3lame \
