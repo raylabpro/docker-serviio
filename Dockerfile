@@ -34,7 +34,7 @@ RUN DIR=$(mktemp -d) && cd ${DIR} && \
   make && \
   make install && \
   make distclean && \
-  apk del build-base nasm && rm -rf /var/cache/apk/* && \
+  apk del build-base nasm && rm -rf /var/cache/apk/*
 
 ARG SERVIIO_VERSION=1.9
 
