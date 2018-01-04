@@ -31,7 +31,7 @@ RUN DIR=$(mktemp -d) && cd ${DIR} && \
   --enable-libx264 --enable-libx265 --enable-libvpx --enable-libtheora --enable-libvorbis \
   --enable-libopus --enable-libass --enable-libwebp --enable-librtmp --enable-postproc --enable-libxvid \
   --enable-avresample --enable-libfreetype --enable-libxcb --disable-debug && \
-  make && \
+  make -j4 && \
   make install && \
   make distclean && \
   apk del build-base nasm && rm -rf /var/cache/apk/*
