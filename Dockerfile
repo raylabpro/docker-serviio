@@ -49,8 +49,9 @@ RUN cd ${DIR} && \
   
 VOLUME ["/opt/serviio/library", "/opt/serviio/plugins", "/opt/serviio/log", "/media/serviio"]
 
-EXPOSE 23423:23423/tcp
-EXPOSE 8895:8895/tcp
 EXPOSE 1900:1900/udp
+EXPOSE 8895:8895/tcp
+EXPOSE 23423:23423/tcp
+EXPOSE 23424:23424/tcp
 
 CMD /opt/serviio/bin/serviio.sh
