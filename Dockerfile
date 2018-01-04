@@ -16,26 +16,30 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repos
     apk update && apk upgrade && \
     apk add --update build-base curl nasm tar bzip2 fdk-aac \
         zlib-dev yasm-dev lame-dev libogg-dev x264-dev lame-dev musl musl-dev \
-        libvpx-dev libvorbis-dev x265-dev freetype-dev fdk-aac-dev pkgconf pkgconf-dev \
-        libass-dev libwebp-dev rtmpdump-dev libtheora-dev opus-dev xvidcore-dev xvidcore
+        libvpx-dev libvorbis-dev x265-dev freetype-dev fdk-aac-dev pkgconf pkgconf-dev libxcb \
+        libass-dev libwebp-dev rtmpdump-dev libtheora-dev opus-dev xvidcore-dev xvidcore libxcb-dev
 
-ARG SERVIIO_VERSION=1.9
+
 ARG FFMPEG_VERSION=3.4.1
 
-# Build ffmpeg and Serviio
+# Build ffmpeg 
 RUN DIR=$(mktemp -d) && cd ${DIR} && \
-  curl -s http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxvf - -C . && \
+  curl -s http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxf - -C . && \
   cd ffmpeg-${FFMPEG_VERSION} && \
   ./configure --disable-doc \
   --enable-version3 --enable-gpl --enable-libfdk-aac --enable-nonfree --enable-libmp3lame \
   --enable-libx264 --enable-libx265 --enable-libvpx --enable-libtheora --enable-libvorbis \
   --enable-libopus --enable-libass --enable-libwebp --enable-librtmp --enable-postproc --enable-libxvid \
   --enable-avresample --enable-libfreetype --enable-libxcb --disable-debug && \
-  make && \
+  make -j4 && \
   make install && \
   make distclean && \
-  apk del build-base nasm && rm -rf /var/cache/apk/* && \
-  cd ${DIR} && \
+  apk del build-base nasm && rm -rf /var/cache/apk/*
+
+ARG SERVIIO_VERSION=1.9
+
+# Build Serviio
+RUN cd ${DIR} && \
   curl -s http://download.serviio.org/releases/serviio-${SERVIIO_VERSION}-linux.tar.gz | tar zxvf - -C . && \
   mkdir -p /opt/serviio && \
   mkdir -p /media/serviio && \
