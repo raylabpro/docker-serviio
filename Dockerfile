@@ -5,7 +5,9 @@
 # or        docker run --rm --name serviio -t -i -p 23423:23423/tcp -p 8895:8895/tcp -p 1900:1900/udp riftbit/docker-serviio
 
 FROM openjdk:8-jre-alpine
-MAINTAINER Riftbit ErgoZ <ergozru@riftbit.com>
+LABEL maintainer="Riftbit ErgoZ <ergozru@riftbit.com>"
+
+ARG FFMPEG_VERSION=3.4.1 SERVIIO_VERSION=1.9
 
 # Prepare APK CDNs
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repositories; \
@@ -17,13 +19,8 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repos
     apk add --update build-base curl nasm tar bzip2 fdk-aac \
         zlib-dev yasm-dev lame-dev libogg-dev x264-dev lame-dev musl musl-dev \
         libvpx-dev libvorbis-dev x265-dev freetype-dev fdk-aac-dev pkgconf pkgconf-dev libxcb \
-        libass-dev libwebp-dev rtmpdump-dev libtheora-dev opus-dev xvidcore-dev xvidcore libxcb-dev
-
-
-ARG FFMPEG_VERSION=3.4.1
-
-# Build ffmpeg 
-RUN DIR=$(mktemp -d) && cd ${DIR} && \
+        libass-dev libwebp-dev rtmpdump-dev libtheora-dev opus-dev xvidcore-dev xvidcore libxcb-dev && \
+  DIR=$(mktemp -d) && cd ${DIR} && \
   curl -s http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxf - -C . && \
   cd ffmpeg-${FFMPEG_VERSION} && \
   ./configure --disable-doc \
@@ -34,12 +31,8 @@ RUN DIR=$(mktemp -d) && cd ${DIR} && \
   make -j4 && \
   make install && \
   make distclean && \
-  apk del build-base nasm && rm -rf /var/cache/apk/*
-
-ARG SERVIIO_VERSION=1.9
-
-# Build Serviio
-RUN cd ${DIR} && \
+  apk del build-base nasm && rm -rf /var/cache/apk/* && \
+  cd ${DIR} && \
   curl -s http://download.serviio.org/releases/serviio-${SERVIIO_VERSION}-linux.tar.gz | tar zxvf - -C . && \
   mkdir -p /opt/serviio && \
   mkdir -p /media/serviio && \
