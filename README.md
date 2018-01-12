@@ -1,5 +1,11 @@
 # docker-serviio
 
+[![](https://images.microbadger.com/badges/version/riftbit/serviio.svg)](https://microbadger.com/images/riftbit/serviio) 
+[![](https://images.microbadger.com/badges/image/riftbit/serviio.svg)](https://microbadger.com/images/riftbit/serviio) 
+[![](https://img.shields.io/docker/pulls/riftbit/serviio.svg)](https://hub.docker.com/r/riftbit/serviio/) 
+[![](https://img.shields.io/docker/stars/riftbit/serviio.svg)](https://hub.docker.com/r/riftbit/serviio/) 
+
+
 > :fire: dcraw not supported at this moment.
   
 Link on docker hub: [riftbit/serviio](https://hub.docker.com/r/riftbit/serviio/)
