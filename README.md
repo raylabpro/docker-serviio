@@ -29,6 +29,7 @@ Link on github: [riftbit/docker-serviio](https://github.com/riftbit/docker-servi
  - **23524:23524/tcp** - HTTPS/1.1 /cds /mediabrowser
 
 ### Volumes
+ - **/opt/serviio/config**
  - **/opt/serviio/library**
  - **/opt/serviio/plugins**
  - **/opt/serviio/log**
