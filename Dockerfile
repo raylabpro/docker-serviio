@@ -25,7 +25,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 ARG SERVIIO_VERSION=1.9 
 ARG FFMPEG_VERSION=3.4.1
 
-ENV JAVA_HOME="/usr/bin/java"
+ENV JAVA_HOME="/usr"
 
 # Prepare APK CDNs
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repositories; \
@@ -167,23 +167,24 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repos
 	mkdir -p /media/serviio && \
 	mv ./serviio-${SERVIIO_VERSION}/* /opt/serviio && \
 	chmod +x /opt/serviio/bin/serviio.sh && \
+	mkdir -p /opt/serviio/log && \
+	touch /opt/serviio/log/serviio.log && \
 	rm -rf ${DIR} && \
 	apk del --purge build-dependencies && \
 	rm -rf /var/cache/apk/*
 	
 VOLUME [ "/opt/serviio/config", "/opt/serviio/library",  "/opt/serviio/log", "/opt/serviio/plugins", "/media/serviio"]
 
-EXPOSE 1900:1900/udp
-EXPOSE 8895:8895/tcp
+EXPOSE 1900/udp
+EXPOSE 8895/tcp
 # HTTP/1.1 /console /rest
-EXPOSE 23423:23423/tcp 
+EXPOSE 23423/tcp 
 # HTTPS/1.1 /console /rest
-EXPOSE 23523:23523/tcp
+EXPOSE 23523/tcp
 # HTTP/1.1 /cds /mediabrowser
-EXPOSE 23424:23424/tcp
+EXPOSE 23424/tcp
 # HTTPS/1.1 /cds /mediabrowser
-EXPOSE 23524:23524/tcp
+EXPOSE 23524/tcp
 
 #-Dserviio.defaultTranscodeFolder=/opt/serviio/transcode 
-
-CMD /opt/serviio/bin/serviio.sh
+CMD tail -f /opt/serviio/log/serviio.log & /opt/serviio/bin/serviio.sh
