@@ -1,13 +1,31 @@
 # Serviio docker
 #
-# VERSION               0.1
-# Run with: docker run --rm --name serviio -d -p 23423:23423/tcp -p 8895:8895/tcp -p 1900:1900/udp riftbit/docker-serviio
-# or        docker run --rm --name serviio -t -i -p 23423:23423/tcp -p 8895:8895/tcp -p 1900:1900/udp riftbit/docker-serviio
+# VERSION               0.2
+# Run with: docker run --rm --name serviio -d -p 23423:23423/tcp -p 23424:23424/tcp -p 8895:8895/tcp -p 1900:1900/udp -v /etc/localtime:/etc/localtime:ro riftbit/serviio
 
-FROM openjdk:8-jre-alpine
-LABEL maintainer="Riftbit ErgoZ <ergozru@riftbit.com>"
+FROM alpine:3.7
 
-ARG FFMPEG_VERSION=3.4.1 SERVIIO_VERSION=1.9
+MAINTAINER "Riftbit ErgoZ <ergozru@riftbit.com>"
+
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VERSION
+
+LABEL org.label-schema.build-date=$BUILD_DATE \
+	org.label-schema.name="DLNA Serviio Container" \
+	org.label-schema.description="DLNA Serviio Container" \
+	org.label-schema.url="https://riftbit.com/" \
+	org.label-schema.vcs-ref=$VCS_REF \
+	org.label-schema.vcs-url="https://github.com/riftbit/docker-serviio" \
+	org.label-schema.vendor="Riftbit Studio" \
+	org.label-schema.version=$VERSION \
+	org.label-schema.schema-version="1.0" \
+	maintainer="Riftbit ErgoZ"
+
+ARG SERVIIO_VERSION=1.9 
+ARG FFMPEG_VERSION=3.4.1
+
+ENV JAVA_HOME="/usr/bin/java"
 
 # Prepare APK CDNs
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repositories; \
@@ -16,35 +34,156 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repos
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories; \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories; \
     apk update && apk upgrade && \
-    apk add --update build-base curl nasm tar bzip2 fdk-aac \
-        zlib-dev yasm-dev lame-dev libogg-dev x264-dev lame-dev musl musl-dev \
-        libvpx-dev libvorbis-dev x265-dev freetype-dev fdk-aac-dev pkgconf pkgconf-dev libxcb \
-        libass-dev libwebp-dev rtmpdump-dev libtheora-dev opus-dev xvidcore-dev xvidcore libxcb-dev && \
-  DIR=$(mktemp -d) && cd ${DIR} && \
-  curl -s http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxf - -C . && \
-  cd ffmpeg-${FFMPEG_VERSION} && \
-  ./configure --disable-doc \
-  --enable-version3 --enable-gpl --enable-libfdk-aac --enable-nonfree --enable-libmp3lame \
-  --enable-libx264 --enable-libx265 --enable-libvpx --enable-libtheora --enable-libvorbis \
-  --enable-libopus --enable-libass --enable-libwebp --enable-librtmp --enable-postproc --enable-libxvid \
-  --enable-avresample --enable-libfreetype --enable-libxcb --disable-debug && \
-  make -j4 && \
-  make install && \
-  make distclean && \
-  apk del build-base nasm && rm -rf /var/cache/apk/* && \
-  cd ${DIR} && \
-  curl -s http://download.serviio.org/releases/serviio-${SERVIIO_VERSION}-linux.tar.gz | tar zxvf - -C . && \
-  mkdir -p /opt/serviio && \
-  mkdir -p /media/serviio && \
-  mv ./serviio-${SERVIIO_VERSION}/* /opt/serviio && \
-  chmod +x /opt/serviio/bin/serviio.sh && \
-  rm -rf ${DIR}
-  
-VOLUME ["/opt/serviio/library", "/opt/serviio/plugins", "/opt/serviio/log", "/media/serviio"]
+	apk add --no-cache --update \
+		alsa-lib \
+		bzip2 \
+		expat \
+		fdk-aac \
+		lame \
+		libbz2 \
+		libdrm \
+		libffi \
+		libjpeg-turbo \
+		libtheora \
+		libogg \
+		libpciaccess \
+		librtmp \
+		libstdc++ \
+		libtasn1 \
+		libva \
+		libvorbis \
+		libvpx \
+		mesa-gl \
+		mesa-glapi \
+		musl \
+		opus \
+		openjdk8-jre \
+		p11-kit \
+		sdl \
+		x264-libs \
+		x264 \
+		x265 \
+		jasper-dev \
+        libass-dev \
+		gnutls-dev \
+		libwebp-dev \
+		lame-dev \
+		v4l-utils-libs \
+		xvidcore && \
+    apk add --no-cache --update --virtual=build-dependencies \
+		alsa-lib-dev \
+		bzip2-dev \
+		coreutils \
+		curl \
+		fdk-aac-dev \
+		freetype-dev \
+		g++ \
+		gcc \
+		git \
+		imlib2-dev \
+		lcms2-dev \
+		libgcc \
+		libjpeg-turbo-dev \
+		libtheora-dev \
+		libogg-dev \
+		libva-dev \
+		libvorbis-dev \
+        libvpx-dev \
+		libx11 \
+		libxau \
+		libxcb \
+		libxcb-dev \
+		libxdamage \
+		libxdmcp \
+		libxext \
+		libxfixes \
+		libxfixes-dev \
+		libxshmfence \
+		libxxf86vm \
+		make \
+		musl-dev \
+		nasm \
+		nettle \
+		opus-dev \
+		pkgconf \
+		pkgconf-dev \
+		rtmpdump-dev \
+		sdl-dev \
+		tar \
+		ttf-dejavu \
+		v4l-utils-dev \
+		x264-dev \
+		x265-dev \
+		xvidcore-dev \
+		yasm-dev \
+        zlib-dev && \
+	DIR=$(mktemp -d) && cd ${DIR} && \
+	curl -s http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxf - -C . && \
+	cd ffmpeg-${FFMPEG_VERSION} && \
+	./configure \
+	--disable-doc \
+	--disable-debug \
+	--disable-shared \
+	--enable-avfilter \
+	--enable-avresample \
+	--enable-gnutls \
+	--enable-gpl \
+	--enable-libass \
+	--enable-libfdk-aac \
+	--enable-libfreetype \
+	--enable-libmp3lame \
+	--enable-libopus \
+	--enable-librtmp \
+	--enable-libtheora \
+	--enable-libv4l2 \
+	--enable-libvorbis \
+	--enable-libvpx \
+	--enable-libwebp \
+	--enable-libx264 \
+	--enable-libx265 \
+	--enable-libxcb \
+	--enable-libxvid \
+	--enable-nonfree \
+	--enable-pic \
+	--enable-pthreads \
+	--enable-postproc \
+	--enable-static \
+	--enable-version3 \
+	--enable-vaapi \
+	--prefix=/usr && \
+	make -j4 && \
+	make install && \
+	gcc -o tools/qt-faststart $CFLAGS tools/qt-faststart.c && \
+	install -D -m755 tools/qt-faststart /usr/bin/qt-faststart && \
+	make distclean && \
+	cd ${DIR} && \
+	wget http://www.cybercom.net/~dcoffin/dcraw/dcraw.c && \
+	gcc -o dcraw -O4 dcraw.c -lm -ljasper -ljpeg -llcms2 && \
+	cp dcraw /usr/bin/dcraw && \
+	chmod +x /usr/bin/dcraw  && \
+	cd ${DIR} && \
+	curl -s http://download.serviio.org/releases/serviio-${SERVIIO_VERSION}-linux.tar.gz | tar zxvf - -C . && \
+	mkdir -p /opt/serviio && \
+	mkdir -p /media/serviio && \
+	mv ./serviio-${SERVIIO_VERSION}/* /opt/serviio && \
+	chmod +x /opt/serviio/bin/serviio.sh && \
+	rm -rf ${DIR} && \
+	apk del --purge build-dependencies && \
+	rm -rf /var/cache/apk/*
+	
+VOLUME [ "/opt/serviio/config", "/opt/serviio/library",  "/opt/serviio/log", "/opt/serviio/plugins", "/media/serviio"]
 
 EXPOSE 1900:1900/udp
 EXPOSE 8895:8895/tcp
-EXPOSE 23423:23423/tcp
+# HTTP/1.1 /console /rest
+EXPOSE 23423:23423/tcp 
+# HTTPS/1.1 /console /rest
+EXPOSE 23523:23523/tcp
+# HTTP/1.1 /cds /mediabrowser
 EXPOSE 23424:23424/tcp
+# HTTPS/1.1 /cds /mediabrowser
+EXPOSE 23524:23524/tcp
+
+#-Dserviio.defaultTranscodeFolder=/opt/serviio/transcode 
 
 CMD /opt/serviio/bin/serviio.sh
