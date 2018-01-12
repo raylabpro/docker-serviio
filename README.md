@@ -1,5 +1,8 @@
 # docker-serviio
 
+[![](http://serviio.org/images/serviio.png)](http://serviio.org/) 
+
+
 [![](https://images.microbadger.com/badges/version/riftbit/serviio.svg)](https://microbadger.com/images/riftbit/serviio) 
 [![](https://images.microbadger.com/badges/image/riftbit/serviio.svg)](https://microbadger.com/images/riftbit/serviio) 
 [![](https://img.shields.io/docker/pulls/riftbit/serviio.svg)](https://hub.docker.com/r/riftbit/serviio/) 
