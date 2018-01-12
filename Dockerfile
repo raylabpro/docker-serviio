@@ -167,6 +167,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repos
 	mkdir -p /media/serviio && \
 	mv ./serviio-${SERVIIO_VERSION}/* /opt/serviio && \
 	chmod +x /opt/serviio/bin/serviio.sh && \
+	mkdir -p /opt/serviio/log && \
 	touch /opt/serviio/log/serviio.log && \
 	rm -rf ${DIR} && \
 	apk del --purge build-dependencies && \
