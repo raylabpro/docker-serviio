@@ -25,7 +25,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 ARG SERVIIO_VERSION=1.9 
 ARG FFMPEG_VERSION=3.4.1
 
-ENV JAVA_HOME="/usr/bin/java"
+ENV JAVA_HOME="/usr"
 
 # Prepare APK CDNs
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repositories; \
