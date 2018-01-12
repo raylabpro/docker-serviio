@@ -173,17 +173,17 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repos
 	
 VOLUME [ "/opt/serviio/config", "/opt/serviio/library",  "/opt/serviio/log", "/opt/serviio/plugins", "/media/serviio"]
 
-EXPOSE 1900:1900/udp
-EXPOSE 8895:8895/tcp
+EXPOSE 1900/udp
+EXPOSE 8895/tcp
 # HTTP/1.1 /console /rest
-EXPOSE 23423:23423/tcp 
+EXPOSE 23423/tcp 
 # HTTPS/1.1 /console /rest
-EXPOSE 23523:23523/tcp
+EXPOSE 23523/tcp
 # HTTP/1.1 /cds /mediabrowser
-EXPOSE 23424:23424/tcp
+EXPOSE 23424/tcp
 # HTTPS/1.1 /cds /mediabrowser
-EXPOSE 23524:23524/tcp
+EXPOSE 23524/tcp
 
 #-Dserviio.defaultTranscodeFolder=/opt/serviio/transcode 
 
-CMD /opt/serviio/bin/serviio.sh
+CMD /opt/serviio/bin/serviio.sh && tail -f /opt/serviio/log/serviio.log
