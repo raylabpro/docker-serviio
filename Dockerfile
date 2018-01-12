@@ -167,6 +167,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repos
 	mkdir -p /media/serviio && \
 	mv ./serviio-${SERVIIO_VERSION}/* /opt/serviio && \
 	chmod +x /opt/serviio/bin/serviio.sh && \
+	touch /opt/serviio/log/serviio.log && \
 	rm -rf ${DIR} && \
 	apk del --purge build-dependencies && \
 	rm -rf /var/cache/apk/*
@@ -185,5 +186,4 @@ EXPOSE 23424/tcp
 EXPOSE 23524/tcp
 
 #-Dserviio.defaultTranscodeFolder=/opt/serviio/transcode 
-
-CMD /opt/serviio/bin/serviio.sh && tail -f /opt/serviio/log/serviio.log
+CMD tail -f /opt/serviio/log/serviio.log & /opt/serviio/bin/serviio.sh
