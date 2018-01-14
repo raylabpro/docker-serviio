@@ -10,8 +10,8 @@ Link on github: [riftbit/docker-serviio](https://github.com/riftbit/docker-servi
 
 ### Build Args
 
- - SERVIIO_VERSION=1.9 
- - FFMPEG_VERSION=3.4.1
+ - **VERSION** = 1.9 - serviio version
+ - **FFMPEG_VERSION** = 3.4.1
 
 
 ### Exposed Ports
