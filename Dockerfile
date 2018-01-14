@@ -9,7 +9,7 @@ MAINTAINER "Riftbit ErgoZ <ergozru@riftbit.com>"
 
 ARG BUILD_DATE
 ARG VCS_REF
-ARG VERSION
+ARG VERSION=1.9
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
 	org.label-schema.name="DLNA Serviio Container" \
@@ -22,7 +22,6 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 	org.label-schema.schema-version="1.0" \
 	maintainer="Riftbit ErgoZ"
 
-ARG SERVIIO_VERSION=1.9 
 ARG FFMPEG_VERSION=3.4.1
 
 ENV JAVA_HOME="/usr"
@@ -162,10 +161,10 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repos
 	cp dcraw /usr/bin/dcraw && \
 	chmod +x /usr/bin/dcraw  && \
 	cd ${DIR} && \
-	curl -s http://download.serviio.org/releases/serviio-${SERVIIO_VERSION}-linux.tar.gz | tar zxvf - -C . && \
+	curl -s http://download.serviio.org/releases/serviio-${VERSION}-linux.tar.gz | tar zxvf - -C . && \
 	mkdir -p /opt/serviio && \
 	mkdir -p /media/serviio && \
-	mv ./serviio-${SERVIIO_VERSION}/* /opt/serviio && \
+	mv ./serviio-${VERSION}/* /opt/serviio && \
 	chmod +x /opt/serviio/bin/serviio.sh && \
 	mkdir -p /opt/serviio/log && \
 	touch /opt/serviio/log/serviio.log && \
