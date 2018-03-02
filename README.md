@@ -32,4 +32,5 @@ Link on github: [riftbit/docker-serviio](https://github.com/riftbit/docker-servi
 
 
 ### Container Changelog (dd.mm.yy)
+ - **02.03.18** - Update Serviio version from 1.9 to 1.9.1
  - **12.01.18** - dcraw now supported. dockerfile cleanups. many fixes and updates
