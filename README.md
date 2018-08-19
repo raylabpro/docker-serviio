@@ -10,7 +10,7 @@ Link on github: [riftbit/docker-serviio](https://github.com/riftbit/docker-servi
 
 ### Build Args
 
- - **VERSION** = 1.9.1 - serviio version
+ - **VERSION** = 1.9.2 - serviio version
  - **FFMPEG_VERSION** = 3.4.1
 
 
