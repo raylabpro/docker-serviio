@@ -3,13 +3,13 @@
 # VERSION               0.2
 # Run with: docker run --rm --name serviio -d -p 23423:23423/tcp -p 23424:23424/tcp -p 8895:8895/tcp -p 1900:1900/udp -v /etc/localtime:/etc/localtime:ro riftbit/serviio
 
-FROM alpine:3.7
+FROM alpine:latest
 
 MAINTAINER "Riftbit ErgoZ <ergozru@riftbit.com>"
 
 ARG BUILD_DATE
 ARG VCS_REF
-ARG VERSION=1.9.2
+ARG VERSION=1.10.1
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
 	org.label-schema.name="DLNA Serviio Container" \
@@ -22,7 +22,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 	org.label-schema.schema-version="1.0" \
 	maintainer="Riftbit ErgoZ"
 
-ARG FFMPEG_VERSION=3.4.1
+ARG FFMPEG_VERSION=4.1
 
 ENV JAVA_HOME="/usr"
 
