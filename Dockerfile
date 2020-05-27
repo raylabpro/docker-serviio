@@ -156,7 +156,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.11/community" >> /etc/apk/repo
 	install -D -m755 tools/qt-faststart /usr/bin/qt-faststart && \
 	make distclean && \
 	cd ${DIR} && \
-	wget http://www.cybercom.net/~dcoffin/dcraw/dcraw.c && \
+	wget https://raw.githubusercontent.com/riftbit/dcraw/master/dcraw.c && \
 	gcc -o dcraw -O4 dcraw.c -lm -ljasper -ljpeg -llcms2 && \
 	cp dcraw /usr/bin/dcraw && \
 	chmod +x /usr/bin/dcraw  && \
