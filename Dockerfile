@@ -3,32 +3,32 @@
 # VERSION               0.2
 # Run with: docker run --rm --name serviio -d -p 23423:23423/tcp -p 23424:23424/tcp -p 8895:8895/tcp -p 1900:1900/udp -v /etc/localtime:/etc/localtime:ro riftbit/serviio
 
-FROM alpine:latest
+FROM alpine:3.11
 
 MAINTAINER "Riftbit ErgoZ <ergozru@riftbit.com>"
 
 ARG BUILD_DATE
 ARG VCS_REF
-ARG VERSION=2.0
+ARG VERSION=2.1
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
 	org.label-schema.name="DLNA Serviio Container" \
 	org.label-schema.description="DLNA Serviio Container" \
 	org.label-schema.url="https://riftbit.com/" \
 	org.label-schema.vcs-ref=$VCS_REF \
-	org.label-schema.vcs-url="https://github.com/riftbit/docker-serviio" \
-	org.label-schema.vendor="Riftbit Studio" \
+	org.label-schema.vcs-url="https://hub.docker.com/r/riftbit/serviio/" \
+	org.label-schema.vendor="[riftbit] ErgoZ" \
 	org.label-schema.version=$VERSION \
 	org.label-schema.schema-version="1.0" \
-	maintainer="Riftbit ErgoZ"
+	maintainer="[riftbit] ErgoZ"
 
-ARG FFMPEG_VERSION=4.1
+ARG FFMPEG_VERSION=4.2
 
 ENV JAVA_HOME="/usr"
 
 # Prepare APK CDNs
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repositories; \
-    echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/main" >> /etc/apk/repositories; \
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.11/community" >> /etc/apk/repositories; \
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.11/main" >> /etc/apk/repositories; \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories; \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories; \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories; \
@@ -63,7 +63,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repos
 		x264 \
 		x265 \
 		jasper-dev \
-        libass-dev \
+		libass-dev \
 		gnutls-dev \
 		libwebp-dev \
 		lame-dev \
@@ -87,7 +87,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repos
 		libogg-dev \
 		libva-dev \
 		libvorbis-dev \
-        libvpx-dev \
+		libvpx-dev \
 		libx11 \
 		libxau \
 		libxcb \
@@ -115,7 +115,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repos
 		x265-dev \
 		xvidcore-dev \
 		yasm-dev \
-        zlib-dev && \
+		zlib-dev && \
 	DIR=$(mktemp -d) && cd ${DIR} && \
 	curl -s http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxf - -C . && \
 	cd ffmpeg-${FFMPEG_VERSION} && \
