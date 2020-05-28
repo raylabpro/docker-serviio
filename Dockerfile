@@ -30,7 +30,9 @@ ENV JAVA_HOME="/usr"
 #    echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories; \
 
 # Prepare APK CDNs
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.10/community" >> /etc/apk/repositories; \
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.11/community" >> /etc/apk/repositories && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.10/main" >> /etc/apk/repositories && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.10/community" >> /etc/apk/repositories && \
     apk update && apk upgrade && \
     apk add --no-cache --update \
 		alsa-lib \
@@ -79,6 +81,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.10/community" >> /etc/apk/repo
 		gcc \
 		git \
 		imlib2-dev \
+		jasper-dev \
 		lcms2-dev \
 		libgcc \
 		libjpeg-turbo-dev \
@@ -159,7 +162,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.10/community" >> /etc/apk/repo
 	make distclean && \
 	cd ${DIR} && \
 	wget https://raw.githubusercontent.com/riftbit/dcraw/master/dcraw.c && \
-	gcc -o dcraw -O4 dcraw.c -lm -ljpeg -llcms2 && \
+	gcc -o dcraw -O4 dcraw.c -lm -ljasper -ljpeg -llcms2 && \
 	cp dcraw /usr/bin/dcraw && \
 	chmod +x /usr/bin/dcraw  && \
 	cd ${DIR} && \
