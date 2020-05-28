@@ -1,11 +1,10 @@
 # Serviio docker
 #
-# VERSION               0.2
 # Run with: docker run --rm --name serviio -d -p 23423:23423/tcp -p 23424:23424/tcp -p 8895:8895/tcp -p 1900:1900/udp -v /etc/localtime:/etc/localtime:ro riftbit/serviio
 
 FROM alpine:3.11
 
-MAINTAINER "Riftbit ErgoZ <ergozru@riftbit.com>"
+MAINTAINER "[riftbit] ErgoZ <ergozru@gmail.com>"
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -17,23 +16,23 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 	org.label-schema.url="https://riftbit.com/" \
 	org.label-schema.vcs-ref=$VCS_REF \
 	org.label-schema.vcs-url="https://hub.docker.com/r/riftbit/serviio/" \
-	org.label-schema.vendor="[riftbit] ErgoZ" \
+	org.label-schema.vendor="[riftbit] ErgoZ <ergozru@gmail.com>" \
 	org.label-schema.version=$VERSION \
 	org.label-schema.schema-version="1.0" \
-	maintainer="[riftbit] ErgoZ"
+	maintainer="[riftbit] ErgoZ <ergozru@gmail.com>"
 
 ARG FFMPEG_VERSION=4.2
 
 ENV JAVA_HOME="/usr"
 
+#    echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories; \
+#    echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories; \
+#    echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories; \
+
 # Prepare APK CDNs
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.11/community" >> /etc/apk/repositories; \
-    echo "http://dl-cdn.alpinelinux.org/alpine/v3.11/main" >> /etc/apk/repositories; \
-    echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories; \
-    echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories; \
-    echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories; \
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.10/community" >> /etc/apk/repositories; \
     apk update && apk upgrade && \
-	apk add --no-cache --update \
+    apk add --no-cache --update \
 		alsa-lib \
 		bzip2 \
 		expat \
@@ -57,19 +56,19 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.11/community" >> /etc/apk/repo
 		musl \
 		opus \
 		openjdk8-jre \
+		openssl \
 		p11-kit \
 		sdl \
 		x264-libs \
 		x264 \
 		x265 \
-		jasper-dev \
 		libass-dev \
 		gnutls-dev \
 		libwebp-dev \
 		lame-dev \
 		v4l-utils-libs \
 		xvidcore && \
-    apk add --no-cache --update --virtual=build-dependencies \
+    apk add --no-cache --update --virtual=.build-dependencies \
 		alsa-lib-dev \
 		bzip2-dev \
 		coreutils \
@@ -104,6 +103,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.11/community" >> /etc/apk/repo
 		nasm \
 		nettle \
 		opus-dev \
+		openssl-dev \
 		pkgconf \
 		pkgconf-dev \
 		rtmpdump-dev \
@@ -147,8 +147,10 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.11/community" >> /etc/apk/repo
 	--enable-pthreads \
 	--enable-postproc \
 	--enable-static \
+	--enable-small \
 	--enable-version3 \
 	--enable-vaapi \
+	--extra-libs="-lpthread -lm" \
 	--prefix=/usr && \
 	make -j4 && \
 	make install && \
@@ -157,7 +159,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.11/community" >> /etc/apk/repo
 	make distclean && \
 	cd ${DIR} && \
 	wget https://raw.githubusercontent.com/riftbit/dcraw/master/dcraw.c && \
-	gcc -o dcraw -O4 dcraw.c -lm -ljasper -ljpeg -llcms2 && \
+	gcc -o dcraw -O4 dcraw.c -lm -ljpeg -llcms2 && \
 	cp dcraw /usr/bin/dcraw && \
 	chmod +x /usr/bin/dcraw  && \
 	cd ${DIR} && \
@@ -169,7 +171,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.11/community" >> /etc/apk/repo
 	mkdir -p /opt/serviio/log && \
 	touch /opt/serviio/log/serviio.log && \
 	rm -rf ${DIR} && \
-	apk del --purge build-dependencies && \
+	apk del --purge .build-dependencies && \
 	rm -rf /var/cache/apk/*
 	
 VOLUME [ "/opt/serviio/config", "/opt/serviio/library",  "/opt/serviio/log", "/opt/serviio/plugins", "/media/serviio"]
