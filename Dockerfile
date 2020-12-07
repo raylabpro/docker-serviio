@@ -2,7 +2,7 @@
 #
 # Run with: docker run --rm --name serviio -d -p 23423:23423/tcp -p 23424:23424/tcp -p 8895:8895/tcp -p 1900:1900/udp -v /etc/localtime:/etc/localtime:ro riftbit/serviio
 
-FROM alpine:3.11
+FROM alpine:3.12
 
 MAINTAINER "[riftbit] ErgoZ <ergozru@gmail.com>"
 
@@ -22,6 +22,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 	maintainer="[riftbit] ErgoZ <ergozru@gmail.com>"
 
 ARG FFMPEG_VERSION=4.2
+ARG JASPER_VERSION=2.0.14
 
 ENV JAVA_HOME="/usr"
 
@@ -82,7 +83,6 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.11/community" >> /etc/apk/repo
 		gcc \
 		git \
 		imlib2-dev \
-		jasper-dev \
 		lcms2-dev \
 		libgcc \
 		libjpeg-turbo-dev \
@@ -103,6 +103,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.11/community" >> /etc/apk/repo
 		libxshmfence \
 		libxxf86vm \
 		make \
+		cmake \
 		musl-dev \
 		nasm \
 		nettle \
@@ -161,6 +162,14 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.11/community" >> /etc/apk/repo
 	gcc -o tools/qt-faststart $CFLAGS tools/qt-faststart.c && \
 	install -D -m755 tools/qt-faststart /usr/bin/qt-faststart && \
 	make distclean && \
+	cd ${DIR} && \
+    curl -sfL https://www.ece.uvic.ca/~frodo/jasper/software/jasper-${JASPER_VERSION}.tar.gz | tar xz && \
+	cd jasper-${JASPER_VERSION} && \
+	mkdir ./obj && \
+	cd ./obj && \
+	cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=/usr/lib && \
+	make && \
+	make install && \
 	cd ${DIR} && \
 	wget https://raw.githubusercontent.com/riftbit/dcraw/master/dcraw.c && \
 	gcc -o dcraw -O4 dcraw.c -lm -ljasper -ljpeg -llcms2 && \
