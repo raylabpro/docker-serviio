@@ -32,6 +32,7 @@ Link on github: [riftbit/docker-serviio](https://github.com/riftbit/docker-servi
 
 
 ### Container Changelog (dd.mm.yy)
+ - **07.12.2020** - Update alpine to 3.12, fix dcraw.c build (add jasper build from source), removed config volume
  - **28.05.2020** - Update Serviio version to 2.1, alpine to 3.11, ffmpeg to 4.2, fix dcraw.c path
  - **27.05.2019** - Update Serviio version to 2.0 and alpine to latest on build date
  - **19.12.2018** - Update Serviio version to 1.10.1 and ffmpeg to 4.1 and alpine to latest on build date
