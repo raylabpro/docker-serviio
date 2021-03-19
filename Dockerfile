@@ -21,7 +21,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 	org.label-schema.schema-version="1.0" \
 	maintainer="[riftbit] ErgoZ <ergozru@gmail.com>"
 
-ARG FFMPEG_VERSION=4.2
+ARG FFMPEG_VERSION=4.3.2
 ARG JASPER_VERSION=2.0.14
 
 ENV JAVA_HOME="/usr"
