@@ -187,9 +187,9 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.11/community" >> /etc/apk/repo
 	apk del --purge .build-dependencies && \
 	rm -rf /var/cache/apk/*
 
-## "/opt/serviio/config"
 
-VOLUME ["/opt/serviio/library",  "/opt/serviio/log", "/opt/serviio/plugins", "/media/serviio"]
+
+# VOLUME ["/opt/serviio/config", "/opt/serviio/library",  "/opt/serviio/log", "/opt/serviio/plugins", "/media/serviio"]
 
 EXPOSE 1900/udp
 EXPOSE 8895/tcp
