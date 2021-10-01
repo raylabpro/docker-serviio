@@ -10,7 +10,7 @@ Link on github: [riftbit/docker-serviio](https://github.com/riftbit/docker-servi
 
 ### Build Args
 
- - `VERSION` = 2.1 - serviio version
+ - `VERSION` = 2.2 - serviio version
  - `FFMPEG_VERSION` = 4.2
 
 
@@ -32,6 +32,7 @@ Link on github: [riftbit/docker-serviio](https://github.com/riftbit/docker-servi
 
 
 ### Container Changelog (dd.mm.yy)
+ - **01.10.2021** - Update Serviio version to 2.2
  - **19.03.2021** - Update FFMPEG to 4.3.2, add healthcheck (PR #19), cleanup volumes (mount only if you need it)
  - **07.12.2020** - Update alpine to 3.12, fix dcraw.c build (add jasper build from source), removed config volume
  - **28.05.2020** - Update Serviio version to 2.1, alpine to 3.11, ffmpeg to 4.2, fix dcraw.c path
