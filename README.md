@@ -2,16 +2,18 @@
 
 [![](http://serviio.org/images/serviio.png)](http://serviio.org/) 
 
-[![](https://images.microbadger.com/badges/image/riftbit/serviio.svg)](https://microbadger.com/images/riftbit/serviio) [![Docker Pulls](https://img.shields.io/docker/pulls/riftbit/serviio.svg)](https://hub.docker.com/r/riftbit/serviio/) [![Docker Stars](https://img.shields.io/docker/stars/riftbit/serviio.svg)](https://hub.docker.com/r/riftbit/serviio/) [![GitHub last commit](https://img.shields.io/github/last-commit/riftbit/docker-serviio.svg)](https://github.com/riftbit/docker-serviio) [![Docker Build Status](https://img.shields.io/docker/build/riftbit/serviio.svg)](https://hub.docker.com/r/riftbit/serviio/)
+[![](https://images.microbadger.com/badges/image/soerentsch/serviio.svg)](https://microbadger.com/images/soerentsch/serviio) [![Docker Pulls](https://img.shields.io/docker/pulls/soerentsch/serviio.svg)](https://hub.docker.com/r/soerentsch/serviio/) [![Docker Stars](https://img.shields.io/docker/stars/soerentsch/serviio.svg)](https://hub.docker.com/r/soerentsch/serviio/) [![GitHub last commit](https://img.shields.io/github/last-commit/soerentsch/docker-serviio.svg)](https://github.com/soerentsch/docker-serviio) [![Docker Build Status](https://img.shields.io/docker/build/soerentsch/serviio.svg)](https://hub.docker.com/r/soerentsch/serviio/)
   
-Link on docker hub: [riftbit/serviio](https://hub.docker.com/r/riftbit/serviio/)
+Link on docker hub: [soerentsch/serviio](https://hub.docker.com/r/soerentsch/serviio/)
 
-Link on github: [riftbit/docker-serviio](https://github.com/riftbit/docker-serviio)
+Link on github: [soerentsch/docker-serviio](https://github.com/soerentsch/docker-serviio)
+
+!!! > THIS IS A FORK OF [riftbit/docker-serviio](https://github.com/riftbit/docker-serviio) < !!!
 
 ### Build Args
 
  - `VERSION` = 2.2.1 - serviio version
- - `FFMPEG_VERSION` = 4.2
+ - `FFMPEG_VERSION` = 4.4.1
 
 
 ### Exposed Ports
@@ -32,6 +34,7 @@ Link on github: [riftbit/docker-serviio](https://github.com/riftbit/docker-servi
 
 
 ### Container Changelog (dd.mm.yy)
+ - **17.12.2021** - Update alpine to 3.12, FFMPEG to 4.4.1, Jasper to 2.0.33
  - **16.12.2021** - Update Serviio version to 2.2.1
  - **01.10.2021** - Update Serviio version to 2.2
  - **19.03.2021** - Update FFMPEG to 4.3.2, add healthcheck (PR #19), cleanup volumes (mount only if you need it)
