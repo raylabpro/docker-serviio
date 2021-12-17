@@ -2,27 +2,27 @@
 #
 # Run with: docker run --rm --name serviio -d -p 23423:23423/tcp -p 23424:23424/tcp -p 8895:8895/tcp -p 1900:1900/udp -v /etc/localtime:/etc/localtime:ro riftbit/serviio
 
-FROM alpine:3.12
+FROM alpine:3.15
 
-MAINTAINER "[riftbit] ErgoZ <ergozru@gmail.com>"
+MAINTAINER "[soerentsch] Soeren <soerentsch@gmail.com>"
 
 ARG BUILD_DATE
 ARG VCS_REF
-ARG VERSION=2.2.1
+ARG VERSION=2.2.1-cleanup
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
 	org.label-schema.name="DLNA Serviio Container" \
 	org.label-schema.description="DLNA Serviio Container" \
-	org.label-schema.url="https://riftbit.com/" \
+	org.label-schema.url="https://github.dev/soerentsch/docker-serviio/" \
 	org.label-schema.vcs-ref=$VCS_REF \
-	org.label-schema.vcs-url="https://hub.docker.com/r/riftbit/serviio/" \
-	org.label-schema.vendor="[riftbit] ErgoZ <ergozru@gmail.com>" \
+	org.label-schema.vcs-url="https://hub.docker.com/r/soerentsch/serviio/" \
+	org.label-schema.vendor="[soerentsch] Soeren <soerentsch@gmail.com>" \
 	org.label-schema.version=$VERSION \
 	org.label-schema.schema-version="1.0" \
-	maintainer="[riftbit] ErgoZ <ergozru@gmail.com>"
+	maintainer="[soerentsch] Soeren <soerentsch@gmail.com>"
 
-ARG FFMPEG_VERSION=4.3.2
-ARG JASPER_VERSION=2.0.14
+ARG FFMPEG_VERSION=4.4.1
+ARG JASPER_VERSION=2.0.33
 
 ENV JAVA_HOME="/usr"
 
@@ -31,9 +31,9 @@ ENV JAVA_HOME="/usr"
 #    echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories; \
 
 # Prepare APK CDNs
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.11/community" >> /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/v3.10/main" >> /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/v3.10/community" >> /etc/apk/repositories && \
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.15/community" >> /etc/apk/repositories && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.15/main" >> /etc/apk/repositories && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.15/community" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk update && apk upgrade && \
     apk add --no-cache --update \
@@ -163,7 +163,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.11/community" >> /etc/apk/repo
 	install -D -m755 tools/qt-faststart /usr/bin/qt-faststart && \
 	make distclean && \
 	cd ${DIR} && \
-    curl -sfL https://www.ece.uvic.ca/~frodo/jasper/software/jasper-${JASPER_VERSION}.tar.gz | tar xz && \
+    curl -sfL https://github.com/jasper-software/jasper/releases/download/version-${JASPER_VERSION}/jasper-${JASPER_VERSION}.tar.gz | tar xz && \
 	cd jasper-${JASPER_VERSION} && \
 	mkdir ./obj && \
 	cd ./obj && \
@@ -171,11 +171,11 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.11/community" >> /etc/apk/repo
 	make && \
 	make install && \
 	cd ${DIR} && \
-	wget https://raw.githubusercontent.com/riftbit/dcraw/master/dcraw.c && \
-	gcc -o dcraw -O4 dcraw.c -lm -ljasper -ljpeg -llcms2 && \
-	cp dcraw /usr/bin/dcraw && \
-	chmod +x /usr/bin/dcraw  && \
-	cd ${DIR} && \
+	# wget https://raw.githubusercontent.com/riftbit/dcraw/master/dcraw.c && \
+	# gcc -o dcraw -O4 dcraw.c -lm -ljasper -ljpeg -llcms2 && \
+	# cp dcraw /usr/bin/dcraw && \
+	# chmod +x /usr/bin/dcraw  && \
+	# cd ${DIR} && \
 	curl -s http://download.serviio.org/releases/serviio-${VERSION}-linux.tar.gz | tar zxvf - -C . && \
 	mkdir -p /opt/serviio && \
 	mkdir -p /media/serviio && \
