@@ -171,11 +171,11 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.15/community" >> /etc/apk/repo
 	make && \
 	make install && \
 	cd ${DIR} && \
-	# wget https://raw.githubusercontent.com/riftbit/dcraw/master/dcraw.c && \
-	# gcc -o dcraw -O4 dcraw.c -lm -ljasper -ljpeg -llcms2 && \
-	# cp dcraw /usr/bin/dcraw && \
-	# chmod +x /usr/bin/dcraw  && \
-	# cd ${DIR} && \
+	wget http://www.dechifro.org/dcraw/dcraw.c && \
+	gcc -o dcraw -O4 dcraw.c -lm -ljasper -ljpeg -llcms2 && \
+	cp dcraw /usr/bin/dcraw && \
+	chmod +x /usr/bin/dcraw  && \
+	cd ${DIR} && \
 	curl -s http://download.serviio.org/releases/serviio-${VERSION}-linux.tar.gz | tar zxvf - -C . && \
 	mkdir -p /opt/serviio && \
 	mkdir -p /media/serviio && \
