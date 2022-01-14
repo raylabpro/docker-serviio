@@ -14,6 +14,7 @@ Link on github: [soerentsch/docker-serviio](https://github.com/soerentsch/docker
 
  - `VERSION` = 2.2.1 - serviio version
  - `FFMPEG_VERSION` = 4.4.1
+ - `JASPER_VERSION` = 2.0.33
 
 
 ### Exposed Ports
