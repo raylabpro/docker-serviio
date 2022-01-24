@@ -21,7 +21,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 	org.label-schema.schema-version="1.0" \
 	maintainer="[soerentsch] Soeren <soerentsch@gmail.com>"
 
-ARG FFMPEG_VERSION=4.4.1
+ARG FFMPEG_VERSION=5.0
 ARG JASPER_VERSION=2.0.33
 
 ENV JAVA_HOME="/usr"
@@ -33,7 +33,7 @@ ENV JAVA_HOME="/usr"
 # Prepare APK CDNs
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.15/community" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/v3.15/main" >> /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.15/releases" >> /etc/apk/repositories && \
     apk update && apk upgrade && \
     apk add --no-cache --update \
 		alsa-lib \
