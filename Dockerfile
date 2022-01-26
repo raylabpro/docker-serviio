@@ -31,8 +31,8 @@ ENV JAVA_HOME="/usr"
 #    echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories; \
 
 # Prepare APK CDNs
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.15/community" >> /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/v3.15/main" >> /etc/apk/repositories && \
+RUN echo "https://dl-cdn.alpinelinux.org/alpine/v3.15/community" >> /etc/apk/repositories && \
+    echo "https://dl-cdn.alpinelinux.org/alpine/v3.15/main" >> /etc/apk/repositories && \
     apk update && apk upgrade && \
     apk add --no-cache --update \
 		alsa-lib \
@@ -120,7 +120,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.15/community" >> /etc/apk/repo
 		yasm-dev \
 		zlib-dev && \
 	DIR=$(mktemp -d) && cd ${DIR} && \
-	curl -s http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxf - -C . && \
+	curl -s https://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxf - -C . && \
 	cd ffmpeg-${FFMPEG_VERSION} && \
 	./configure \
 	--disable-doc \
@@ -169,12 +169,12 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.15/community" >> /etc/apk/repo
 	make && \
 	make install && \
 	cd ${DIR} && \
-	wget http://www.dechifro.org/dcraw/dcraw.c && \
+	wget https://www.dechifro.org/dcraw/dcraw.c && \
 	gcc -o dcraw -O4 dcraw.c -lm -ljasper -ljpeg -llcms2 && \
 	cp dcraw /usr/bin/dcraw && \
 	chmod +x /usr/bin/dcraw  && \
 	cd ${DIR} && \
-	curl -s http://download.serviio.org/releases/serviio-${VERSION}-linux.tar.gz | tar zxvf - -C . && \
+	curl -s https://download.serviio.org/releases/serviio-${VERSION}-linux.tar.gz | tar zxvf - -C . && \
 	mkdir -p /opt/serviio && \
 	mkdir -p /media/serviio && \
 	mv ./serviio-${VERSION}/* /opt/serviio && \
