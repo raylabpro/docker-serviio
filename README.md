@@ -37,7 +37,7 @@ Link on github: [soerentsch/docker-serviio](https://github.com/soerentsch/docker
 ### Container Changelog (dd.mm.yy)
  - **24.01.2022** - Update FFMPEG to 5.0
  - **18.12.2021** - Update dcraw
- - **17.12.2021** - Update alpine to 3.12, FFMPEG to 4.4.1, Jasper to 2.0.33
+ - **17.12.2021** - Update alpine to 3.15, FFMPEG to 4.4.1, Jasper to 2.0.33
  - **16.12.2021** - Update Serviio version to 2.2.1
  - **01.10.2021** - Update Serviio version to 2.2
  - **19.03.2021** - Update FFMPEG to 4.3.2, add healthcheck (PR #19), cleanup volumes (mount only if you need it)

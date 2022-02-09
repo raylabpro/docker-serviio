@@ -22,7 +22,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 	maintainer="[soerentsch] Soeren <soerentsch@gmail.com>"
 
 ARG FFMPEG_VERSION=5.0
-ARG JASPER_VERSION=2.0.33
+ARG JASPER_VERSION=3.0.0
 
 ENV JAVA_HOME="/usr"
 
@@ -120,7 +120,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.15/community" >> /etc/apk/repo
 		yasm-dev \
 		zlib-dev && \
 	DIR=$(mktemp -d) && cd ${DIR} && \
-	curl -s http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxf - -C . && \
+	curl -s https://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxf - -C . && \
 	cd ffmpeg-${FFMPEG_VERSION} && \
 	./configure \
 	--disable-doc \
@@ -168,12 +168,12 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.15/community" >> /etc/apk/repo
 	make && \
 	make install && \
 	cd ${DIR} && \
-	wget http://www.dechifro.org/dcraw/dcraw.c && \
+	wget https://www.dechifro.org/dcraw/dcraw.c && \
 	gcc -o dcraw -O4 dcraw.c -lm -ljasper -ljpeg -llcms2 && \
 	cp dcraw /usr/bin/dcraw && \
 	chmod +x /usr/bin/dcraw  && \
 	cd ${DIR} && \
-	curl -s http://download.serviio.org/releases/serviio-${VERSION}-linux.tar.gz | tar zxvf - -C . && \
+	curl -s https://download.serviio.org/releases/serviio-${VERSION}-linux.tar.gz | tar zxvf - -C . && \
 	mkdir -p /opt/serviio && \
 	mkdir -p /media/serviio && \
 	mv ./serviio-${VERSION}/* /opt/serviio && \
