@@ -33,7 +33,6 @@ ENV JAVA_HOME="/usr"
 # Prepare APK CDNs
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.15/community" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/v3.15/main" >> /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/v3.15/releases" >> /etc/apk/repositories && \
     apk update && apk upgrade && \
     apk add --no-cache --update \
 		alsa-lib \
@@ -128,7 +127,6 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.15/community" >> /etc/apk/repo
 	--disable-debug \
 	--disable-shared \
 	--enable-avfilter \
-	--enable-avresample \
 	--enable-gnutls \
 	--enable-gpl \
 	--enable-libass \
