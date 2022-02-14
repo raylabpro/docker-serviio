@@ -14,7 +14,7 @@ Link on github: [soerentsch/docker-serviio](https://github.com/soerentsch/docker
 
  - `VERSION` = 2.2.1 - serviio version
  - `FFMPEG_VERSION` = 5.0
- - `JASPER_VERSION` = 2.0.33
+ - `JASPER_VERSION` = 3.0.0
 
 
 ### Exposed Ports
@@ -35,12 +35,13 @@ Link on github: [soerentsch/docker-serviio](https://github.com/soerentsch/docker
 
 
 ### Container Changelog (dd.mm.yy)
- - **24.01.2022** - Update FFMPEG to 5.0
+ - **09.02.2022** - Update Jasper to 3.0.0
+ - **24.01.2022** - Update FFmpeg to 5.0
  - **18.12.2021** - Update dcraw
- - **17.12.2021** - Update alpine to 3.15, FFMPEG to 4.4.1, Jasper to 2.0.33
+ - **17.12.2021** - Update alpine to 3.15, FFmpeg to 4.4.1, Jasper to 2.0.33
  - **16.12.2021** - Update Serviio version to 2.2.1
  - **01.10.2021** - Update Serviio version to 2.2
- - **19.03.2021** - Update FFMPEG to 4.3.2, add healthcheck (PR #19), cleanup volumes (mount only if you need it)
+ - **19.03.2021** - Update FFmpeg to 4.3.2, add healthcheck (PR #19), cleanup volumes (mount only if you need it)
  - **07.12.2020** - Update alpine to 3.12, fix dcraw.c build (add jasper build from source), removed config volume
  - **28.05.2020** - Update Serviio version to 2.1, alpine to 3.11, ffmpeg to 4.2, fix dcraw.c path
  - **27.05.2019** - Update Serviio version to 2.0 and alpine to latest on build date
