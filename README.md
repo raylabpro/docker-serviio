@@ -14,7 +14,7 @@ Link on github: [soerentsch/docker-serviio](https://github.com/soerentsch/docker
 
  - `VERSION` = 2.2.1 - serviio version
  - `FFMPEG_VERSION` = 5.0
- - `JASPER_VERSION` = 3.0.1
+ - `JASPER_VERSION` = 3.0.2
 
 
 ### Exposed Ports
@@ -35,6 +35,7 @@ Link on github: [soerentsch/docker-serviio](https://github.com/soerentsch/docker
 
 
 ### Container Changelog (dd.mm.yy)
+ - **16.02.2022** - Update Jasper to 3.0.2
  - **14.02.2022** - Update Jasper to 3.0.1
  - **09.02.2022** - Update Jasper to 3.0.0
  - **24.01.2022** - Update FFmpeg to 5.0
