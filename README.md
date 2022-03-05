@@ -1,17 +1,15 @@
 # docker-serviio
 
-[![](http://serviio.org/images/serviio.png)](http://serviio.org/) 
+[![](http://serviio.org/images/serviio.png)](http://serviio.org/)
 
-[![](https://images.microbadger.com/badges/image/riftbit/serviio.svg)](https://microbadger.com/images/riftbit/serviio) [![Docker Pulls](https://img.shields.io/docker/pulls/riftbit/serviio.svg)](https://hub.docker.com/r/riftbit/serviio/) [![Docker Stars](https://img.shields.io/docker/stars/riftbit/serviio.svg)](https://hub.docker.com/r/riftbit/serviio/) [![GitHub last commit](https://img.shields.io/github/last-commit/riftbit/docker-serviio.svg)](https://github.com/riftbit/docker-serviio) [![Docker Build Status](https://img.shields.io/docker/build/riftbit/serviio.svg)](https://hub.docker.com/r/riftbit/serviio/)
-  
-Link on docker hub: [riftbit/serviio](https://hub.docker.com/r/riftbit/serviio/)
+Link on github: [dfuchslin/docker-serviio](https://github.com/dfuchslin/docker-serviio)
 
-Link on github: [riftbit/docker-serviio](https://github.com/riftbit/docker-serviio)
+!!! > THIS IS A FORK OF [riftbit/docker-serviio](https://github.com/riftbit/docker-serviio) < !!!
 
 ### Build Args
 
- - `VERSION` = 2.2 - serviio version
- - `FFMPEG_VERSION` = 4.2
+ - `VERSION` = 2.2.1 - serviio version
+ - `FFMPEG_VERSION` = 5.0
 
 
 ### Exposed Ports
@@ -32,6 +30,7 @@ Link on github: [riftbit/docker-serviio](https://github.com/riftbit/docker-servi
 
 
 ### Container Changelog (dd.mm.yy)
+ - **05.02.2022** - Update Serviio version to 2.2.1, alpine to 3.15, ffmpeg to 5.0, dcraw to latest official
  - **01.10.2021** - Update Serviio version to 2.2
  - **19.03.2021** - Update FFMPEG to 4.3.2, add healthcheck (PR #19), cleanup volumes (mount only if you need it)
  - **07.12.2020** - Update alpine to 3.12, fix dcraw.c build (add jasper build from source), removed config volume
