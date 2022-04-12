@@ -8,7 +8,7 @@ Link on docker hub: [soerentsch/serviio](https://hub.docker.com/r/soerentsch/ser
 
 Link on github: [soerentsch/docker-serviio](https://github.com/soerentsch/docker-serviio)
 
-!!! > THIS IS A FORK OF [riftbit/docker-serviio](https://github.com/riftbit/docker-serviio) < !!!
+Started as a fork of [riftbit/docker-serviio](https://github.com/riftbit/docker-serviio), just to provide the newest security and performance patches.
 
 ### Build Args
 
@@ -35,6 +35,7 @@ Link on github: [soerentsch/docker-serviio](https://github.com/soerentsch/docker
 
 
 ### Container Changelog (dd.mm.yy)
+ - **12.04.2022** - Update alpine to 3.15.4
  - **16.03.2022** - Update Jasper to 3.0.3
  - **16.02.2022** - Update Jasper to 3.0.2
  - **14.02.2022** - Update Jasper to 3.0.1
