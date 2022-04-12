@@ -2,7 +2,7 @@
 #
 # Run with: docker run --rm --name serviio -d -p 23423:23423/tcp -p 23424:23424/tcp -p 8895:8895/tcp -p 1900:1900/udp -v /etc/localtime:/etc/localtime:ro soerentsch/serviio
 
-FROM alpine:3.15
+FROM alpine:3.15.4
 
 MAINTAINER "[soerentsch] Soeren <soerentsch@gmail.com>"
 
