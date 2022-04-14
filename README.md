@@ -35,6 +35,7 @@ Started as a fork of [riftbit/docker-serviio](https://github.com/riftbit/docker-
 
 
 ### Container Changelog (dd.mm.yy)
+ - **14.04.2022** - Added alpine edge repository for a newer OpenJDK-JRE version
  - **12.04.2022** - Update alpine to 3.15.4
  - **16.03.2022** - Update Jasper to 3.0.3
  - **16.02.2022** - Update Jasper to 3.0.2
