@@ -20,7 +20,7 @@ Started as a fork of [riftbit/docker-serviio](https://github.com/riftbit/docker-
 ### Exposed Ports
 
  - `1900:1900/udp` - DLNA
- - `8895:8895/tcp`
+ - `8895:8895/tcp` - Serviio Content Delivery
  - `23423:23423/tcp` - HTTP/1.1 /console /rest
  - `23424:23424/tcp` - HTTP/1.1 /cds /mediabrowser
 
