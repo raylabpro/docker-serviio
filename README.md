@@ -46,7 +46,7 @@ Started as a fork of [riftbit/docker-serviio](https://github.com/riftbit/docker-
  - **24.01.2022** - Update FFmpeg to 5.0
  - **18.12.2021** - Update dcraw
  - **17.12.2021** - Update alpine to 3.15, FFmpeg to 4.4.1, Jasper to 2.0.33
- - **16.12.2021** - Update Serviio version to 2.2.1
+ - **16.12.2021** - Update Serviio version to 2.2.1 (fixed CVE-2021-44228 vulnerability caused by Log4j library)
  - **01.10.2021** - Update Serviio version to 2.2
  - **19.03.2021** - Update FFmpeg to 4.3.2, add healthcheck (PR #19), cleanup volumes (mount only if you need it)
  - **07.12.2020** - Update alpine to 3.12, fix dcraw.c build (add jasper build from source), removed config volume
