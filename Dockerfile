@@ -120,7 +120,7 @@ RUN set -ex \
 ### Create WORKDIR and get all ingredients		
 	&& DIR=$(mktemp -d) && cd ${DIR} \
 	&& curl -s https://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxvf - -C . \
-    && curl -s https://github.com/jasper-software/jasper/releases/download/version-${JASPER_VERSION}/jasper-${JASPER_VERSION}.tar.gz | tar zxvf - -C . \
+	&& curl -s https://github.com/jasper-software/jasper/releases/download/version-${JASPER_VERSION}/jasper-${JASPER_VERSION}.tar.gz | tar zxvf - -C . \
 	&& wget https://raw.githubusercontent.com/soerentsch/dcraw/master/dcraw.c \
 	&& curl -s https://download.serviio.org/releases/serviio-${SERVIIO_VERSION}-linux.tar.gz | tar zxvf - -C . \
 ### Build ffmpeg	
