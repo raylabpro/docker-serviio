@@ -30,9 +30,9 @@ ENV JAVA_HOME="/usr"
 # Prepare APK CDNs
 RUN set -ex \
 	&& echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
-    && echo "https://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
-    && apk update && apk upgrade \
-    && apk add --no-cache --update \
+	&& echo "https://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
+	&& apk update && apk upgrade \
+	&& apk add --no-cache --update \
 		alsa-lib \
 		bzip2 \
 		expat \
@@ -68,7 +68,7 @@ RUN set -ex \
 		lame-dev \
 		v4l-utils-libs \
 		xvidcore \
-    && apk add --no-cache --update --virtual=.build-dependencies \
+	&& apk add --no-cache --update --virtual=.build-dependencies \
 		alsa-lib-dev \
 		bzip2-dev \
 		coreutils \
