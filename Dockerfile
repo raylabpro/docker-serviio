@@ -7,22 +7,23 @@ FROM alpine:3.15.4
 MAINTAINER "[soerentsch] Soeren <soerentsch@gmail.com>"
 
 ARG BUILD_DATE
-ARG VCS_REF
-ARG VERSION=2.2.1
+ARG BUILD_VCS_REF
 
-LABEL org.label-schema.build-date=$BUILD_DATE \
-	org.label-schema.name="DLNA Serviio Container" \
-	org.label-schema.description="DLNA Serviio Container" \
-	org.label-schema.url="https://github.dev/soerentsch/docker-serviio/" \
-	org.label-schema.vcs-ref=$VCS_REF \
-	org.label-schema.vcs-url="https://hub.docker.com/r/soerentsch/serviio/" \
-	org.label-schema.vendor="[soerentsch] Soeren <soerentsch@gmail.com>" \
-	org.label-schema.version=$VERSION \
-	org.label-schema.schema-version="1.0" \
-	maintainer="[soerentsch] Soeren <soerentsch@gmail.com>"
-
+ARG SERVIIO_VERSION=2.2.1
 ARG FFMPEG_VERSION=5.0
 ARG JASPER_VERSION=3.0.3
+
+LABEL \
+	org.label-schema.build-date="${BUILD_DATE}" \
+	org.label-schema.description="DLNA Serviio Container" \
+	org.label-schema.name="DLNA Serviio Container" \
+	org.label-schema.schema-version="1.0" \
+	org.label-schema.url="https://github.dev/soerentsch/docker-serviio/" \
+	org.label-schema.vcs-ref="${BUILD_VCS_REF}" \
+	org.label-schema.vcs-url="https://hub.docker.com/r/soerentsch/serviio/" \
+	org.label-schema.vendor="[soerentsch] Soeren <soerentsch@gmail.com>" \
+	org.label-schema.version="${SERVIIO_VERSION}" \
+	maintainer="[soerentsch] Soeren <soerentsch@gmail.com>"
 
 ENV JAVA_HOME="/usr"
 
@@ -31,10 +32,11 @@ ENV JAVA_HOME="/usr"
 #    echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories; \
 
 # Prepare APK CDNs
-RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
-    echo "https://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
-    apk update && apk upgrade && \
-    apk add --no-cache --update \
+RUN set -ex \
+	&& echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+    && echo "https://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
+    && apk update && apk upgrade \
+    && apk add --no-cache --update \
 		alsa-lib \
 		bzip2 \
 		expat \
@@ -69,8 +71,8 @@ RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repo
 		libwebp-dev \
 		lame-dev \
 		v4l-utils-libs \
-		xvidcore && \
-    apk add --no-cache --update --virtual=.build-dependencies \
+		xvidcore \
+    && apk add --no-cache --update --virtual=.build-dependencies \
 		alsa-lib-dev \
 		bzip2-dev \
 		coreutils \
@@ -118,11 +120,17 @@ RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repo
 		x265-dev \
 		xvidcore-dev \
 		yasm-dev \
-		zlib-dev && \
-	DIR=$(mktemp -d) && cd ${DIR} && \
-	curl -s https://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxf - -C . && \
-	cd ffmpeg-${FFMPEG_VERSION} && \
-	./configure \
+		zlib-dev \
+### Create WORKDIR and get all ingredients		
+	&& DIR=$(mktemp -d) && cd ${DIR} \
+	&& curl -s https://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxvf - -C . \
+    && curl -s https://github.com/jasper-software/jasper/releases/download/version-${JASPER_VERSION}/jasper-${JASPER_VERSION}.tar.gz | tar zxvf - -C . \
+	&& wget https://raw.githubusercontent.com/soerentsch/dcraw/master/dcraw.c \
+	&& curl -s https://download.serviio.org/releases/serviio-${SERVIIO_VERSION}-linux.tar.gz | tar zxvf - -C . \
+### Build ffmpeg	
+	&& cd ${DIR} \
+	&& cd ffmpeg-${FFMPEG_VERSION} \
+	&& ./configure \
 	--disable-doc \
 	--disable-debug \
 	--disable-shared \
@@ -159,47 +167,47 @@ RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repo
 	gcc -o tools/qt-faststart $CFLAGS tools/qt-faststart.c && \
 	install -D -m755 tools/qt-faststart /usr/bin/qt-faststart && \
 	make distclean && \
+### Build Jasper	
 	cd ${DIR} && \
-    curl -sfL https://github.com/jasper-software/jasper/releases/download/version-${JASPER_VERSION}/jasper-${JASPER_VERSION}.tar.gz | tar xz && \
 	cd jasper-${JASPER_VERSION} && \
 	mkdir ./obj && \
 	cd ./obj && \
 	cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=/usr/lib && \
 	make && \
 	make install && \
+### Build dcraw	
 	cd ${DIR} && \
-	wget https://www.dechifro.org/dcraw/dcraw.c && \
 	gcc -o dcraw -O4 dcraw.c -lm -ljasper -ljpeg -llcms2 && \
 	cp dcraw /usr/bin/dcraw && \
 	chmod +x /usr/bin/dcraw  && \
+### Install Serviio	
 	cd ${DIR} && \
-	curl -s https://download.serviio.org/releases/serviio-${VERSION}-linux.tar.gz | tar zxvf - -C . && \
 	mkdir -p /opt/serviio && \
 	mkdir -p /media/serviio && \
-	mv ./serviio-${VERSION}/* /opt/serviio && \
+	mv ./serviio-${SERVIIO_VERSION}/* /opt/serviio && \
 	chmod +x /opt/serviio/bin/serviio.sh && \
 	mkdir -p /opt/serviio/log && \
 	touch /opt/serviio/log/serviio.log && \
+### Cleanup	
 	rm -rf ${DIR} && \
 	apk del --purge .build-dependencies && \
 	rm -rf /var/cache/apk/*
 
+VOLUME ["/opt/serviio/config", "/opt/serviio/library",  "/opt/serviio/log", "/opt/serviio/plugins", "/media/serviio"]
 
-
-# VOLUME ["/opt/serviio/config", "/opt/serviio/library",  "/opt/serviio/log", "/opt/serviio/plugins", "/media/serviio"]
-
+# DLNA
 EXPOSE 1900/udp
+# Serviio Content Delivery
 EXPOSE 8895/tcp
 # HTTP/1.1 /console /rest
 EXPOSE 23423/tcp 
-# HTTPS/1.1 /console /rest
-EXPOSE 23523/tcp
 # HTTP/1.1 /cds /mediabrowser
 EXPOSE 23424/tcp
+# HTTPS/1.1 /console /rest
+EXPOSE 23523/tcp
 # HTTPS/1.1 /cds /mediabrowser
 EXPOSE 23524/tcp
 
 HEALTHCHECK --start-period=5m CMD wget --quiet --tries=1 -O /dev/null --server-response --timeout=5 http://127.0.0.1:23423/console/ || exit 1
 
-#-Dserviio.defaultTranscodeFolder=/opt/serviio/transcode 
 CMD tail -f /opt/serviio/log/serviio.log & /opt/serviio/bin/serviio.sh
