@@ -27,10 +27,6 @@ LABEL \
 
 ENV JAVA_HOME="/usr"
 
-#    echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories; \
-#    echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories; \
-#    echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories; \
-
 # Prepare APK CDNs
 RUN set -ex \
 	&& echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
@@ -59,7 +55,7 @@ RUN set -ex \
 		mesa-glapi \
 		musl \
 		opus \
-		openjdk8-jre \
+		openjdk17-jre \
 		openssl \
 		p11-kit \
 		sdl \
@@ -131,67 +127,67 @@ RUN set -ex \
 	&& cd ${DIR} \
 	&& cd ffmpeg-${FFMPEG_VERSION} \
 	&& ./configure \
-	--disable-doc \
-	--disable-debug \
-	--disable-shared \
-	--enable-avfilter \
-	--enable-gnutls \
-	--enable-gpl \
-	--enable-libass \
-	--enable-libfdk-aac \
-	--enable-libfreetype \
-	--enable-libmp3lame \
-	--enable-libopus \
-	--enable-librtmp \
-	--enable-libtheora \
-	--enable-libv4l2 \
-	--enable-libvorbis \
-	--enable-libvpx \
-	--enable-libwebp \
-	--enable-libx264 \
-	--enable-libx265 \
-	--enable-libxcb \
-	--enable-libxvid \
-	--enable-nonfree \
-	--enable-pic \
-	--enable-pthreads \
-	--enable-postproc \
-	--enable-static \
-	--enable-small \
-	--enable-version3 \
-	--enable-vaapi \
-	--extra-libs="-lpthread -lm" \
-	--prefix=/usr && \
-	make -j4 && \
-	make install && \
-	gcc -o tools/qt-faststart $CFLAGS tools/qt-faststart.c && \
-	install -D -m755 tools/qt-faststart /usr/bin/qt-faststart && \
-	make distclean && \
+		--disable-doc \
+		--disable-debug \
+		--disable-shared \
+		--enable-avfilter \
+		--enable-gnutls \
+		--enable-gpl \
+		--enable-libass \
+		--enable-libfdk-aac \
+		--enable-libfreetype \
+		--enable-libmp3lame \
+		--enable-libopus \
+		--enable-librtmp \
+		--enable-libtheora \
+		--enable-libv4l2 \
+		--enable-libvorbis \
+		--enable-libvpx \
+		--enable-libwebp \
+		--enable-libx264 \
+		--enable-libx265 \
+		--enable-libxcb \
+		--enable-libxvid \
+		--enable-nonfree \
+		--enable-pic \
+		--enable-pthreads \
+		--enable-postproc \
+		--enable-static \
+		--enable-small \
+		--enable-version3 \
+		--enable-vaapi \
+		--extra-libs="-lpthread -lm" \
+		--prefix=/usr \
+	&& make -j$(nproc) \
+	&& make install \
+	&& gcc -o tools/qt-faststart $CFLAGS tools/qt-faststart.c \
+	&& install -D -m755 tools/qt-faststart /usr/bin/qt-faststart \
+	&& make distclean \
 ### Build Jasper	
-	cd ${DIR} && \
-	cd jasper-${JASPER_VERSION} && \
-	mkdir ./obj && \
-	cd ./obj && \
-	cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=/usr/lib && \
-	make && \
-	make install && \
+	&& cd ${DIR} \
+	&& cd jasper-${JASPER_VERSION} \
+	&& mkdir ./obj \
+	&& cd ./obj \
+	&& cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=/usr/lib \
+	&& make -j$(nproc) \
+	&& make install \
 ### Build dcraw	
-	cd ${DIR} && \
-	gcc -o dcraw -O4 dcraw.c -lm -ljasper -ljpeg -llcms2 && \
-	cp dcraw /usr/bin/dcraw && \
-	chmod +x /usr/bin/dcraw  && \
+	&& cd ${DIR} \
+	&& gcc -o dcraw -O4 dcraw.c -lm -ljasper -ljpeg -llcms2 \
+	&& cp dcraw /usr/bin/dcraw \
+	&& chmod +x /usr/bin/dcraw \
 ### Install Serviio	
-	cd ${DIR} && \
-	mkdir -p /opt/serviio && \
-	mkdir -p /media/serviio && \
-	mv ./serviio-${SERVIIO_VERSION}/* /opt/serviio && \
-	chmod +x /opt/serviio/bin/serviio.sh && \
-	mkdir -p /opt/serviio/log && \
-	touch /opt/serviio/log/serviio.log && \
+	&& cd ${DIR} \
+	&& mkdir -p /opt/serviio \
+	&& mkdir -p /media/serviio \
+	&& mv ./serviio-${SERVIIO_VERSION}/* /opt/serviio \
+	&& chmod +x /opt/serviio/bin/serviio.sh \
+	&& mkdir -p /opt/serviio/log \
+	&& touch /opt/serviio/log/serviio.log \
 ### Cleanup	
-	rm -rf ${DIR} && \
-	apk del --purge .build-dependencies && \
-	rm -rf /var/cache/apk/*
+	&& rm -rf ${DIR} \
+	&& apk del --purge .build-dependencies \
+	&& rm -rf /var/cache/apk/*
 
 VOLUME ["/opt/serviio/config", "/opt/serviio/library",  "/opt/serviio/log", "/opt/serviio/plugins", "/media/serviio"]
 
