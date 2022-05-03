@@ -18,9 +18,9 @@ LABEL \
 	org.label-schema.description="DLNA Serviio Container" \
 	org.label-schema.name="DLNA Serviio Container" \
 	org.label-schema.schema-version="1.0" \
-	org.label-schema.url="https://github.dev/soerentsch/docker-serviio/" \
+	org.label-schema.url="https://hub.docker.com/r/soerentsch/serviio/" \
 	org.label-schema.vcs-ref="${BUILD_VCS_REF}" \
-	org.label-schema.vcs-url="https://hub.docker.com/r/soerentsch/serviio/" \
+	org.label-schema.vcs-url="https://github.dev/soerentsch/docker-serviio/" \
 	org.label-schema.vendor="[soerentsch] Soeren <soerentsch@gmail.com>" \
 	org.label-schema.version="${SERVIIO_VERSION}" \
 	maintainer="[soerentsch] Soeren <soerentsch@gmail.com>"
