@@ -13,7 +13,7 @@ Started as a fork of [riftbit/docker-serviio](https://github.com/riftbit/docker-
 ### Build Args
 
  - `SERVIIO_VERSION` = 2.2.1
- - `FFMPEG_VERSION` = 5.0
+ - `FFMPEG_VERSION` = 5.0.1
  - `JASPER_VERSION` = 3.0.3
 
 
