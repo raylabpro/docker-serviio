@@ -37,8 +37,8 @@ Started as a fork of [riftbit/docker-serviio](https://github.com/riftbit/docker-
 
 
 ### Container Changelog (dd.mm.yy)
- - **01.06.2022** - Update to alpine 3.16
- - **23.05.2022** - Update to FFmpeg 5.0.1
+ - **01.06.2022** - Update alpine to 3.16
+ - **23.05.2022** - Update FFmpeg to 5.0.1
  - **04.05.2022** - Upgrade OpenJDK from 8 to 17
  - **14.04.2022** - Added alpine edge repository for a newer OpenJDK-JRE version
  - **12.04.2022** - Update alpine to 3.15.4
