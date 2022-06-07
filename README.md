@@ -15,7 +15,7 @@ Started as a fork of [riftbit/docker-serviio](https://github.com/riftbit/docker-
  - `ALPINE_VERSION` = 3.16
  - `SERVIIO_VERSION` = 2.2.1
  - `FFMPEG_VERSION` = 5.0.1
- - `JASPER_VERSION` = 3.0.3
+ - `JASPER_VERSION` = 3.0.4
 
 
 ### Exposed Ports
@@ -38,6 +38,7 @@ Started as a fork of [riftbit/docker-serviio](https://github.com/riftbit/docker-
 
 
 ### Container Changelog (dd.mm.yy)
+ - **08.06.2022** - Update Jasper to 3.0.4
  - **03.06.2022** - Added ARG variable for the alpine version
  - **01.06.2022** - Update alpine to 3.16
  - **23.05.2022** - Update FFmpeg to 5.0.1
