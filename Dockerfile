@@ -5,8 +5,6 @@ ARG ALPINE_VERSION=3.16
 
 FROM alpine:${ALPINE_VERSION}
 
-MAINTAINER "[soerentsch] Soeren <soerentsch@gmail.com>"
-
 ARG BUILD_DATE
 ARG BUILD_VCS_REF
 
