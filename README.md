@@ -2,7 +2,7 @@
 
 [![](http://serviio.org/images/serviio.png)](http://serviio.org/) 
 
-[![](https://images.microbadger.com/badges/image/soerentsch/serviio.svg)](https://microbadger.com/images/soerentsch/serviio) [![Docker Pulls](https://img.shields.io/docker/pulls/soerentsch/serviio)](https://hub.docker.com/r/soerentsch/serviio/) [![Docker Stars](https://img.shields.io/docker/stars/soerentsch/serviio)](https://hub.docker.com/r/soerentsch/serviio/) [![GitHub last commit](https://img.shields.io/github/last-commit/soerentsch/docker-serviio/dockerhub.svg)](https://github.com/soerentsch/docker-serviio/dockerhub) 
+[![](https://images.microbadger.com/badges/image/soerentsch/serviio.svg)](https://microbadger.com/images/soerentsch/serviio) [![Docker Pulls](https://img.shields.io/docker/pulls/soerentsch/serviio)](https://hub.docker.com/r/soerentsch/serviio/) [![Docker Stars](https://img.shields.io/docker/stars/soerentsch/serviio)](https://hub.docker.com/r/soerentsch/serviio/) [![GitHub last commit](https://img.shields.io/github/last-commit/soerentsch/docker-serviio/dockerhub.svg)](https://github.com/soerentsch/docker-serviio/dockerhub) [![Join the chat at https://gitter.im/docker-serviio/community](https://badges.gitter.im/docker-serviio/community.svg)](https://gitter.im/docker-serviio/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
   
 Link on docker hub: [soerentsch/serviio](https://hub.docker.com/r/soerentsch/serviio/)
 
