@@ -36,6 +36,11 @@ Started as a fork of [riftbit/docker-serviio](https://github.com/riftbit/docker-
  - `/opt/serviio/log`
  - `/media/serviio` - put media content here and add in serviio gui this path
 
+### Platform differences
+#### JVM
+ - For the 32bit Platforms (386, arm7, armhf) OpenJDK 8 will use (the latest 32bit OpenJDK version).
+ - For the 64bit Platforms (amd64) OpenJDK 17 will use.
+
 
 ### Container Changelog (dd.mm.yy)
  - **08.06.2022** - Update Jasper to 3.0.4
