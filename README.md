@@ -16,6 +16,7 @@ Started as a fork of [riftbit/docker-serviio](https://github.com/riftbit/docker-
  - `SERVIIO_VERSION` = 2.2.1
  - `FFMPEG_VERSION` = 5.0.1
  - `JASPER_VERSION` = 3.0.5
+ - `JRE_PACKAGE` = openjdk17-jre (openjdk8-jre for 32bit platforms)
 
 
 ### Exposed Ports
@@ -43,7 +44,7 @@ Started as a fork of [riftbit/docker-serviio](https://github.com/riftbit/docker-
 
 
 ### Container Changelog (dd.mm.yy)
- - **24.06.2022** - Update Jasper to 3.0.5. Start with MultiArch Support (Hello Raspi ;-))
+ - **24.06.2022** - Update Jasper to 3.0.5. Added JRE_PACKAGE build-arg for MultiArch Support (Hello Raspi ;-))
  - **08.06.2022** - Update Jasper to 3.0.4
  - **03.06.2022** - Added ARG variable for the alpine version
  - **01.06.2022** - Update alpine to 3.16
