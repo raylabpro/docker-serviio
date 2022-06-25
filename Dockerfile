@@ -10,7 +10,8 @@ ARG BUILD_VCS_REF
 
 ARG SERVIIO_VERSION=2.2.1
 ARG FFMPEG_VERSION=5.0.1
-ARG JASPER_VERSION=3.0.4
+ARG JASPER_VERSION=3.0.5
+ARG JRE_PACKAGE=openjdk17-jre
 
 LABEL \
 	org.label-schema.build-date="${BUILD_DATE}" \
@@ -55,7 +56,7 @@ RUN set -ex \
 		mesa-glapi \
 		musl \
 		opus \
-		openjdk17-jre \
+		${JRE_PACKAGE} \
 		openssl \
 		p11-kit \
 		sdl \
