@@ -19,14 +19,15 @@ docker create --name=serviio \
 -v <path to plugins>:/plugins \
 -v <path to media>:/media \
 --net host \
--p <port at host>:1900/udp \
--p <port at host>:8895/tcp \
+-p 1900:1900/udp \
+-p 8895:8895/tcp \
 -p <port at host>:23423/tcp \
 soerentsch/serviio:latest
 ```
 
 The webui is at `<your-ip>:23423/console`.
-Serviio serve DLNA over the default port 1900 with UDP, the media itself will be provided over port 8895 with TCP.
+
+Serviio serve DLNA over the default port `1900` with `UDP`, the media itself will be provided over port `8895` with `TCP`.
 
 ## Container Settings
 ### Build Args
