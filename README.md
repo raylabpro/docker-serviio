@@ -39,9 +39,8 @@ Started as a fork of [riftbit/docker-serviio](https://github.com/riftbit/docker-
 
 ### Platform differences
 #### JVM
- - For the 32bit Platforms (386, arm7, armhf) OpenJDK 8 will use (the latest 32bit OpenJDK version).
- - For the 64bit Platforms (amd64, arm64) OpenJDK 17 will use.
-
+ - 32bit Platforms (x86, 386, arm7, armhf) will use OpenJDK 8 (the latest OpenJDK with 32bit support).
+ - 64bit Platforms (x86_64, amd64, aarch64, arm64) will use OpenJDK 17.
 
 ### Container Changelog (dd.mm.yy)
  - **24.06.2022** - Update Jasper to 3.0.5. Added JRE_PACKAGE build-arg for MultiArch Support (Hello Raspi ;-))
