@@ -10,6 +10,25 @@ Link on github: [soerentsch/docker-serviio](https://github.com/soerentsch/docker
 
 Started as a fork of [riftbit/docker-serviio](https://github.com/riftbit/docker-serviio), just to provide the newest security and performance patches.
 
+## Usage
+```
+docker create --name=serviio \
+-v /etc/localtime:/etc/localtime:ro \
+-v <path to config>:/config \
+-v <path to database>:/library \
+-v <path to plugins>:/plugins \
+-v <path to media>:/media \
+-net host
+-p <port at host>:1900/udp
+-p <port at host>:8895/tcp
+-p <port at host>:23423/tcp
+--net=host soerentsch/serviio:latest
+```
+
+The webui is at `<your-ip>:23423/console`.
+Serviio serve DLNA over the default port 1900 with UDP, the media itself will be provided over port 8895 with TCP.
+
+## Container Settings
 ### Build Args
 
  - `ALPINE_VERSION` = 3.16
@@ -17,7 +36,6 @@ Started as a fork of [riftbit/docker-serviio](https://github.com/riftbit/docker-
  - `FFMPEG_VERSION` = 5.0.1
  - `JASPER_VERSION` = 3.0.5
  - `JRE_PACKAGE` = openjdk17-jre (openjdk8-jre for 32bit platforms)
-
 
 ### Exposed Ports
 
@@ -37,12 +55,12 @@ Started as a fork of [riftbit/docker-serviio](https://github.com/riftbit/docker-
  - `/opt/serviio/log`
  - `/media/serviio` - put media content here and add in serviio gui this path
 
-### Platform differences
-#### JVM
+## Platform differences
+### JVM
  - 32bit Platforms (x86, 386, arm7, armhf) will use OpenJDK 8 (the latest OpenJDK with 32bit support).
  - 64bit Platforms (x86_64, amd64, aarch64, arm64) will use OpenJDK 17.
 
-### Container Changelog (dd.mm.yy)
+## Container Changelog (dd.mm.yy)
  - **24.06.2022** - Update Jasper to 3.0.5. Added JRE_PACKAGE build-arg for MultiArch Support (Hello Raspi ;-))
  - **08.06.2022** - Update Jasper to 3.0.4
  - **03.06.2022** - Added ARG variable for the alpine version
