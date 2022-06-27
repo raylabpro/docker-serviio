@@ -18,11 +18,11 @@ docker create --name=serviio \
 -v <path to database>:/library \
 -v <path to plugins>:/plugins \
 -v <path to media>:/media \
--net host
--p <port at host>:1900/udp
--p <port at host>:8895/tcp
--p <port at host>:23423/tcp
---net=host soerentsch/serviio:latest
+--net host \
+-p <port at host>:1900/udp \
+-p <port at host>:8895/tcp \
+-p <port at host>:23423/tcp \
+soerentsch/serviio:latest
 ```
 
 The webui is at `<your-ip>:23423/console`.
