@@ -14,14 +14,11 @@ Started as a fork of [riftbit/docker-serviio](https://github.com/riftbit/docker-
 ```
 docker create --name=serviio \
 -v /etc/localtime:/etc/localtime:ro \
--v <path to config>:/config \
--v <path to database>:/library \
--v <path to plugins>:/plugins \
 -v <path to media>:/media \
 --net host \
 -p 1900:1900/udp \
 -p 8895:8895/tcp \
--p <port at host>:23423/tcp \
+-p 23423:23423/tcp \
 soerentsch/serviio:latest
 ```
 
