@@ -99,6 +99,7 @@ RUN set -ex \
 		libvpx-dev \ 
 		libwebp-dev \ 
 		libxfixes-dev \ 
+		make \
 		opus-dev \ 
 		perl-dev \ 
 		pulseaudio-dev \ 
