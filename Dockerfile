@@ -126,20 +126,28 @@ RUN set -ex \
 	&& cd ${DIR} \
 	&& cd ffmpeg-${FFMPEG_VERSION} \
 	&& ./configure \
-		--disable-doc \
-		--disable-debug \
-		--disable-shared \
 		--enable-avfilter \
+		--disable-debug \
+		--disable-doc \
 		--enable-gnutls \
 		--enable-gpl \
+		--enable-libaom \
 		--enable-libass \
+		--enable-libdav1d \
+		--enable-libdrm \
 		--enable-libfdk-aac \
 		--enable-libfreetype \
 		--enable-libmp3lame \
 		--enable-libopus \
+		--enable-libpulse \
+		--enable-librist \
 		--enable-librtmp \
+		--enable-libsoxr \
+		--enable-libsrt \
+		--enable-libssh \
 		--enable-libtheora \
 		--enable-libv4l2 \
+		--enable-libvidstab \
 		--enable-libvorbis \
 		--enable-libvpx \
 		--enable-libwebp \
@@ -147,14 +155,19 @@ RUN set -ex \
 		--enable-libx265 \
 		--enable-libxcb \
 		--enable-libxvid \
+		--enable-lto \
 		--enable-nonfree \
 		--enable-pic \
-		--enable-pthreads \
 		--enable-postproc \
-		--enable-static \
+		--enable-pthreads \
+		--disable-shared \
 		--enable-small \
-		--enable-version3 \
+		--enable-static \
+		--enable-stripping \
 		--enable-vaapi \
+		--enable-vdpau \
+		--enable-version3 \
+		--enable-vulkan \
 		--extra-libs="-lpthread -lm" \
 		--prefix=/usr \
 	&& make -j$(nproc) \
