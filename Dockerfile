@@ -65,7 +65,8 @@ RUN set -ex \
 		opus \ 
 		sdl2 \ 
 		soxr \ 
-		tar \ 
+		tar \
+		tiff \ 
 		v4l-utils-libs \ 
 		vidstab \ 
 		x264-libs \ 
@@ -107,6 +108,7 @@ RUN set -ex \
 		samurai \ 
 		sdl2-dev \ 
 		soxr-dev \ 
+		tiff-dev \
 		v4l-utils-dev \ 
 		x264-dev \ 
 		x265-dev \ 
