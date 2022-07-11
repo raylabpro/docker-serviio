@@ -165,7 +165,6 @@ RUN set -ex \
 		--disable-shared \
 		--enable-small \
 		--enable-static \
-		--enable-stripping \
 		--enable-vaapi \
 		--enable-vdpau \
 		--enable-version3 \
