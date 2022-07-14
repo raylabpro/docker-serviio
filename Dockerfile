@@ -12,6 +12,7 @@ ARG SERVIIO_VERSION=2.2.1
 ARG FFMPEG_VERSION=5.0.1
 ARG JASPER_VERSION=3.0.5
 ARG JRE_PACKAGE=openjdk17-jre
+ARG FFMPEG_CONF_PARAM
 
 LABEL \
 	org.label-schema.build-date="${BUILD_DATE}" \
@@ -127,7 +128,7 @@ RUN set -ex \
 ### Build ffmpeg	
 	&& cd ${DIR} \
 	&& cd ffmpeg-${FFMPEG_VERSION} \
-	&& ./configure \
+	&& ./configure ${FFMPEG_CONF_PARAM} \
 		--enable-avfilter \
 		--disable-debug \
 		--disable-doc \
