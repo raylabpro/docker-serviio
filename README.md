@@ -59,6 +59,7 @@ Serviio serve DLNA over the default port `1900` with `UDP`, the media itself wil
  - 64bit Platforms (x86_64, amd64, aarch64, arm64) will use OpenJDK 17.
 
 ## Container Changelog (dd.mm.yy)
+ - **22.07.2022** - Update FFmpeg to 5.1
  - **19.07.2022** - Disable the Healthcheck to prevent continuous Disk Activity (#29). Update alpine to 3.16.1, Jasper to 3.0.6. 
  - **12.07.2022** - Added missing dependencies for dcraw and FFmpeg.
  - **24.06.2022** - Update Jasper to 3.0.5. Added JRE_PACKAGE build-arg for MultiArch Support (Hello Raspi ;-))
