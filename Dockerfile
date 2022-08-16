@@ -1,7 +1,7 @@
 # Serviio docker
 #
 # Run with: docker run --rm --name serviio -d -p 23423:23423/tcp -p 23424:23424/tcp -p 8895:8895/tcp -p 1900:1900/udp -v /etc/localtime:/etc/localtime:ro soerentsch/serviio
-ARG ALPINE_VERSION=3.16.1
+ARG ALPINE_VERSION=3.16.2
 
 FROM alpine:${ALPINE_VERSION}
 
@@ -9,10 +9,10 @@ ARG BUILD_DATE
 ARG BUILD_VCS_REF
 
 ARG SERVIIO_VERSION=2.2.1
-ARG FFMPEG_VERSION=5.1
-ARG JASPER_VERSION=3.0.6
+#ARG FFMPEG_VERSION=5.1
+#ARG JASPER_VERSION=3.0.6
 ARG JRE_PACKAGE=openjdk17-jre
-ARG FFMPEG_CONF_PARAM
+#ARG FFMPEG_CONF_PARAM
 
 LABEL \
 	org.label-schema.build-date="${BUILD_DATE}" \
@@ -35,46 +35,50 @@ RUN set -ex \
 	&& echo "https://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
 	&& apk update && apk upgrade \
 	&& apk add --no-cache --update \
-		alsa-lib \ 
-		aom-libs \ 
-		fdk-aac \ 
-		gnutls \ 
-		lame \ 
-		lcms2 \ 
-		libass \ 
-		libbz2 \ 
-		libdav1d \ 
-		libdrm \ 
-		libjpeg-turbo \ 
-		libpulse \ 
-		librist \ 
-		librtmp \ 
-		libsrt \ 
-		libstdc++ \ 
-		libssh \ 
-		libtheora \ 
-		libva \ 
-		libvdpau \ 
-		libvorbis \ 
-		libvpx \ 
-		libwebp \ 
-		libx11 \ 
-		libxcb \ 
-		musl \ 
+		ffmpeg \
+		jasper \
+#		alsa-lib \ 
+#		aom-libs \ 
+#		fdk-aac \ 
+#		gnutls \ 
+#		lame \ 
+#		lcms2 \ 
+#		libass \ 
+#		libbz2 \ 
+#		libdav1d \ 
+#		libdrm \ 
+#		libjpeg-turbo \ 
+#		libpulse \ 
+#		librist \ 
+#		librtmp \ 
+#		libsrt \ 
+#		libstdc++ \ 
+#		libssh \ 
+#		libtheora \ 
+#		libva \ 
+#		libvdpau \ 
+#		libvorbis \ 
+#		libvpx \ 
+#		libwebp \ 
+#		libx11 \ 
+#		libxcb \ 
+#		musl \ 
 		${JRE_PACKAGE} \ 
-		openssl \ 
-		opus \ 
-		sdl2 \ 
-		soxr \ 
-		tar \
-		tiff \ 
-		v4l-utils-libs \ 
-		vidstab \ 
-		x264-libs \ 
-		x265-libs \ 
-		xvidcore \ 
-		zlib \ 
+#		openssl \ 
+#		opus \ 
+#		sdl2 \ 
+#		soxr \ 
+#		tar \
+#		tiff \ 
+#		v4l-utils-libs \ 
+#		vidstab \ 
+#		x264-libs \ 
+#		x265-libs \ 
+#		xvidcore \ 
+#		zlib \ 
 	&& apk add --no-cache --update --virtual=.build-dependencies \
+		ffmpeg-dev \
+		jasper-dev \
 		alsa-lib-dev \ 
 		aom-dev \ 
 		bzip2-dev \ 
@@ -121,70 +125,70 @@ RUN set -ex \
 		vulkan-loader-dev \
 ### Create WORKDIR and get all ingredients		
 	&& DIR=$(mktemp -d) && cd ${DIR} \
-	&& wget https://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz && tar xvf ffmpeg-${FFMPEG_VERSION}.tar.gz \
-	&& wget https://github.com/jasper-software/jasper/releases/download/version-${JASPER_VERSION}/jasper-${JASPER_VERSION}.tar.gz && tar xvf jasper-${JASPER_VERSION}.tar.gz \
+#	&& wget https://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz && tar xvf ffmpeg-${FFMPEG_VERSION}.tar.gz \
+#	&& wget https://github.com/jasper-software/jasper/releases/download/version-${JASPER_VERSION}/jasper-${JASPER_VERSION}.tar.gz && tar xvf jasper-${JASPER_VERSION}.tar.gz \
 	&& wget https://raw.githubusercontent.com/soerentsch/dcraw/master/dcraw.c \
 	&& wget https://download.serviio.org/releases/serviio-${SERVIIO_VERSION}-linux.tar.gz && tar xvf serviio-${SERVIIO_VERSION}-linux.tar.gz \
 ### Build ffmpeg	
-	&& cd ${DIR} \
-	&& cd ffmpeg-${FFMPEG_VERSION} \
-	&& ./configure ${FFMPEG_CONF_PARAM} \
-		--enable-avfilter \
-		--disable-debug \
-		--disable-doc \
-		--enable-gnutls \
-		--enable-gpl \
-		--enable-libaom \
-		--enable-libass \
-		--enable-libdav1d \
-		--enable-libdrm \
-		--enable-libfdk-aac \
-		--enable-libfreetype \
-		--enable-libmp3lame \
-		--enable-libopus \
-		--enable-libpulse \
-		--enable-librist \
-		--enable-librtmp \
-		--enable-libsoxr \
-		--enable-libsrt \
-		--enable-libssh \
-		--enable-libtheora \
-		--enable-libv4l2 \
-		--enable-libvidstab \
-		--enable-libvorbis \
-		--enable-libvpx \
-		--enable-libwebp \
-		--enable-libx264 \
-		--enable-libx265 \
-		--enable-libxcb \
-		--enable-libxvid \
-		--enable-lto \
-		--enable-nonfree \
-		--enable-pic \
-		--enable-postproc \
-		--enable-pthreads \
-		--disable-shared \
-		--enable-small \
-		--enable-static \
-		--enable-vaapi \
-		--enable-vdpau \
-		--enable-version3 \
-		--enable-vulkan \
-		--extra-libs="-lpthread -lm" \
-		--prefix=/usr \
-	&& make -j$(nproc) \
-	&& make install \
-	&& gcc -o tools/qt-faststart $CFLAGS tools/qt-faststart.c \
-	&& install -D -m755 tools/qt-faststart /usr/bin/qt-faststart \
-	&& make distclean \
+#	&& cd ${DIR} \
+#	&& cd ffmpeg-${FFMPEG_VERSION} \
+#	&& ./configure ${FFMPEG_CONF_PARAM} \
+#		--enable-avfilter \
+#		--disable-debug \
+#		--disable-doc \
+#		--enable-gnutls \
+#		--enable-gpl \
+#		--enable-libaom \
+#		--enable-libass \
+#		--enable-libdav1d \
+#		--enable-libdrm \
+#		--enable-libfdk-aac \
+#		--enable-libfreetype \
+#		--enable-libmp3lame \
+#		--enable-libopus \
+#		--enable-libpulse \
+#		--enable-librist \
+#		--enable-librtmp \
+#		--enable-libsoxr \
+#		--enable-libsrt \
+#		--enable-libssh \
+#		--enable-libtheora \
+#		--enable-libv4l2 \
+#		--enable-libvidstab \
+#		--enable-libvorbis \
+#		--enable-libvpx \
+#		--enable-libwebp \
+#		--enable-libx264 \
+#		--enable-libx265 \
+#		--enable-libxcb \
+#		--enable-libxvid \
+#		--enable-lto \
+#		--enable-nonfree \
+#		--enable-pic \
+#		--enable-postproc \
+#		--enable-pthreads \
+#		--disable-shared \
+#		--enable-small \
+#		--enable-static \
+#		--enable-vaapi \
+#		--enable-vdpau \
+#		--enable-version3 \
+#		--enable-vulkan \
+#		--extra-libs="-lpthread -lm" \
+#		--prefix=/usr \
+#	&& make -j$(nproc) \
+#	&& make install \
+#	&& gcc -o tools/qt-faststart $CFLAGS tools/qt-faststart.c \
+#	&& install -D -m755 tools/qt-faststart /usr/bin/qt-faststart \
+#	&& make distclean \
 ### Build Jasper	
-	&& cd ${DIR} \
-	&& cd jasper-${JASPER_VERSION} \
-	&& mkdir ./obj \
-	&& cd ./obj \
-	&& cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=/usr/lib \
-	&& make -j$(nproc) \
-	&& make install \
+#	&& cd ${DIR} \
+#	&& cd jasper-${JASPER_VERSION} \
+#	&& mkdir ./obj \
+#	&& cd ./obj \
+#	&& cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=/usr/lib \
+#	&& make -j$(nproc) \
+#	&& make install \
 ### Build dcraw	
 	&& cd ${DIR} \
 	&& gcc -o dcraw -O4 dcraw.c -lm -ljasper -ljpeg -llcms2 \

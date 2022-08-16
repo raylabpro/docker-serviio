@@ -29,10 +29,8 @@ Serviio serve DLNA over the default port `1900` with `UDP`, the media itself wil
 ## Container Settings
 ### Build Args
 
- - `ALPINE_VERSION` = 3.16.1
+ - `ALPINE_VERSION` = 3.16.2
  - `SERVIIO_VERSION` = 2.2.1
- - `FFMPEG_VERSION` = 5.1
- - `JASPER_VERSION` = 3.0.6
  - `JRE_PACKAGE` = openjdk17-jre (openjdk8-jre for 32bit platforms)
 
 ### Exposed Ports
@@ -59,6 +57,7 @@ Serviio serve DLNA over the default port `1900` with `UDP`, the media itself wil
  - 64bit Platforms (x86_64, amd64, aarch64, arm64) will use OpenJDK 17.
 
 ## Container Changelog (dd.mm.yy)
+ - **15.08.2022** - Update alpine to 3.16.2. Replaced librtmp by native FFmpeg routines. Replaced own FFmpeg and Jasper builds by alpine packages, they are up to date and in a good shape.
  - **22.07.2022** - Update FFmpeg to 5.1
  - **19.07.2022** - Disable the Healthcheck to prevent continuous Disk Activity (#29). Update alpine to 3.16.1, Jasper to 3.0.6. 
  - **12.07.2022** - Added missing dependencies for dcraw and FFmpeg.
