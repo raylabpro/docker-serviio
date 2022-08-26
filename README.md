@@ -57,32 +57,34 @@ Serviio serve DLNA over the default port `1900` with `UDP`, the media itself wil
  - 64bit Platforms (x86_64, amd64, aarch64, arm64) will use OpenJDK 17.
 
 ## Container Changelog (dd.mm.yy)
- - **15.08.2022** - Update alpine to 3.16.2. Replaced librtmp by native FFmpeg routines. Replaced own FFmpeg and Jasper builds by alpine packages, they are up to date and in a good shape.
- - **22.07.2022** - Update FFmpeg to 5.1
- - **19.07.2022** - Disable the Healthcheck to prevent continuous Disk Activity (#29). Update alpine to 3.16.1, Jasper to 3.0.6. 
- - **12.07.2022** - Added missing dependencies for dcraw and FFmpeg.
- - **24.06.2022** - Update Jasper to 3.0.5. Added JRE_PACKAGE build-arg for MultiArch Support (Hello Raspi ;-))
- - **08.06.2022** - Update Jasper to 3.0.4
- - **03.06.2022** - Added ARG variable for the alpine version
- - **01.06.2022** - Update alpine to 3.16
- - **23.05.2022** - Update FFmpeg to 5.0.1
- - **04.05.2022** - Upgrade OpenJDK from 8 to 17
- - **14.04.2022** - Added alpine edge repository for a newer OpenJDK-JRE version
- - **12.04.2022** - Update alpine to 3.15.4
- - **16.03.2022** - Update Jasper to 3.0.3
- - **16.02.2022** - Update Jasper to 3.0.2
- - **14.02.2022** - Update Jasper to 3.0.1
- - **09.02.2022** - Update Jasper to 3.0.0
- - **24.01.2022** - Update FFmpeg to 5.0
- - **18.12.2021** - Update dcraw
- - **17.12.2021** - Update alpine to 3.15, FFmpeg to 4.4.1, Jasper to 2.0.33
- - **16.12.2021** - Update Serviio version to 2.2.1 (fixed CVE-2021-44228 vulnerability caused by Log4j library)
- - **01.10.2021** - Update Serviio version to 2.2
- - **19.03.2021** - Update FFmpeg to 4.3.2, add healthcheck (PR #19), cleanup volumes (mount only if you need it)
- - **07.12.2020** - Update alpine to 3.12, fix dcraw.c build (add jasper build from source), removed config volume
- - **28.05.2020** - Update Serviio version to 2.1, alpine to 3.11, ffmpeg to 4.2, fix dcraw.c path
- - **27.05.2019** - Update Serviio version to 2.0 and alpine to latest on build date
- - **19.12.2018** - Update Serviio version to 1.10.1 and ffmpeg to 4.1 and alpine to latest on build date
- - **09.05.2018** - Update Serviio version from 1.9.1 to 1.9.2
- - **02.03.2018** - Update Serviio version from 1.9 to 1.9.1
- - **12.01.2018** - dcraw now supported. dockerfile cleanups. many fixes and updates
+ | Date | Changes |
+ | ---- | ------- |
+ | **15.08.2022** | Update alpine to 3.16.2. Replaced librtmp by native FFmpeg routines. Replaced own FFmpeg and Jasper builds by alpine packages, they are up to date and in a good shape. |
+ | **22.07.2022** | Update FFmpeg to 5.1
+ | **19.07.2022** | Disable the Healthcheck to prevent continuous Disk Activity (#29). Update alpine to 3.16.1, Jasper to 3.0.6. 
+ | **12.07.2022** | Added missing dependencies for dcraw and FFmpeg.
+ | **24.06.2022** | Update Jasper to 3.0.5. Added JRE_PACKAGE build-arg for MultiArch Support (Hello Raspi ;-))
+ | **08.06.2022** | Update Jasper to 3.0.4
+ | **03.06.2022** | Added ARG variable for the alpine version
+ | **01.06.2022** | Update alpine to 3.16
+ | **23.05.2022** | Update FFmpeg to 5.0.1
+ | **04.05.2022** | Upgrade OpenJDK from 8 to 17
+ | **14.04.2022** | Added alpine edge repository for a newer OpenJDK-JRE version
+ | **12.04.2022** | Update alpine to 3.15.4
+ | **16.03.2022** | Update Jasper to 3.0.3
+ | **16.02.2022** | Update Jasper to 3.0.2
+ | **14.02.2022** | Update Jasper to 3.0.1
+ | **09.02.2022** | Update Jasper to 3.0.0
+ | **24.01.2022** | Update FFmpeg to 5.0
+ | **18.12.2021** | Update dcraw
+ | **17.12.2021** | Update alpine to 3.15, FFmpeg to 4.4.1, Jasper to 2.0.33
+ | **16.12.2021** | Update Serviio version to 2.2.1 (fixed CVE-2021-44228 vulnerability caused by Log4j library)
+ | **01.10.2021** | Update Serviio version to 2.2
+ | **19.03.2021** | Update FFmpeg to 4.3.2, add healthcheck (PR #19), cleanup volumes (mount only if you need it)
+ | **07.12.2020** | Update alpine to 3.12, fix dcraw.c build (add jasper build from source), removed config volume
+ | **28.05.2020** | Update Serviio version to 2.1, alpine to 3.11, ffmpeg to 4.2, fix dcraw.c path
+ | **27.05.2019** | Update Serviio version to 2.0 and alpine to latest on build date
+ | **19.12.2018** | Update Serviio version to 1.10.1 and ffmpeg to 4.1 and alpine to latest on build date
+ | **09.05.2018** | Update Serviio version from 1.9.1 to 1.9.2
+ | **02.03.2018** | Update Serviio version from 1.9 to 1.9.1
+ | **12.01.2018** | dcraw now supported. dockerfile cleanups. many fixes and updates

@@ -36,52 +36,9 @@ RUN set -ex \
 		jasper \
 		${JRE_PACKAGE} \ 
 	&& apk add --no-cache --update --virtual=.build-dependencies \
-		ffmpeg-dev \
 		jasper-dev \
-		alsa-lib-dev \ 
-		aom-dev \ 
-		bzip2-dev \ 
-		cmake \ 
-		coreutils \ 
-		fdk-aac-dev \ 
-		gcc \ 
-		gnutls-dev \ 
 		g++ \ 
-		imlib2-dev \ 
-		lame-dev \ 
 		lcms2-dev \ 
-		libass-dev \ 
-		libdrm-dev \ 
-		libgcc \ 
-		libjpeg-turbo-dev \ 
-		librist-dev \ 
-		libsrt-dev \ 
-		libssh-dev \ 
-		libtheora-dev \ 
-		libva-dev \ 
-		libvdpau-dev \ 
-		libvorbis-dev \ 
-		libvpx-dev \ 
-		libwebp-dev \ 
-		libxfixes-dev \ 
-		make \
-		opus-dev \ 
-		perl-dev \ 
-		pulseaudio-dev \ 
-		rtmpdump-dev \ 
-		samurai \ 
-		sdl2-dev \ 
-		soxr-dev \ 
-		tiff-dev \
-		v4l-utils-dev \ 
-		x264-dev \ 
-		x265-dev \ 
-		xvidcore-dev \ 
-		yasm \ 
-		zlib-dev \ 
-		dav1d-dev \ 
-		vidstab-dev \ 
-		vulkan-loader-dev \
 ### Create WORKDIR and get all ingredients		
 	&& DIR=$(mktemp -d) && cd ${DIR} \
 	&& wget https://raw.githubusercontent.com/soerentsch/dcraw/master/dcraw.c \
