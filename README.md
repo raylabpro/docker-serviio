@@ -59,6 +59,7 @@ Serviio serve DLNA over the default port `1900` with `UDP`, the media itself wil
 ## Container Changelog (dd.mm.yy)
  | Date | Changes |
  | ---- | ------- |
+ | **29.09.2022** | Update FFmpeg to 5.1.2. Many minor alpine updates.
  | **06.09.2022** | Update FFmpeg to 5.1.1. Many minor alpine updates.
  | **15.08.2022** | Update alpine to 3.16.2. Replaced librtmp by native FFmpeg routines. Replaced own FFmpeg and Jasper builds by alpine packages, they are up to date and in a good shape. |
  | **22.07.2022** | Update FFmpeg to 5.1
