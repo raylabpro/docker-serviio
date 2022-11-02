@@ -23,6 +23,17 @@ LABEL \
 	org.label-schema.version="${SERVIIO_VERSION}" \
 	maintainer="[soerentsch] Soeren <soerentsch@gmail.com>"
 
+LABEL \
+	org.opencontainers.image.created="${BUILD_DATE}" \
+	org.opencontainers.image.description="DLNA Serviio Container" \
+	org.opencontainers.image.title="DLNA Serviio Container" \
+	org.opencontainers.image.url="https://hub.docker.com/r/soerentsch/serviio/" \
+	org.opencontainers.image.revision="${BUILD_VCS_REF}" \
+	org.opencontainers.image.source="https://github.dev/soerentsch/docker-serviio/" \
+	org.opencontainers.image.vendor="[soerentsch] Soeren <soerentsch@gmail.com>" \
+	org.opencontainers.image.version="${SERVIIO_VERSION}" \
+	org.opencontainers.image.authors="[soerentsch] Soeren <soerentsch@gmail.com>"
+
 ENV JAVA_HOME="/usr"
 
 # Prepare APK CDNs
