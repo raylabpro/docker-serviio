@@ -29,7 +29,7 @@ Serviio serve DLNA over the default port `1900` with `UDP`, the media itself wil
 ## Container Settings
 ### Build Args
 
- - `ALPINE_VERSION` = 3.16.2
+ - `ALPINE_VERSION` = 3.16.3
  - `SERVIIO_VERSION` = 2.3
  - `JRE_PACKAGE` = openjdk17-jre (openjdk8-jre for 32bit platforms)
 
@@ -59,6 +59,7 @@ Serviio serve DLNA over the default port `1900` with `UDP`, the media itself wil
 ## Container Changelog (dd.mm.yy)
  | Date | Changes |
  | ---- | ------- |
+ | **16.11.2022** | Update alpine to 3.16.3
  | **27.10.2022** | Downgrade OpenJDK from 17 to 8 regarding of an i18n issue of Serviio 2.3.
  | **23.10.2022** | Update Serviio to 2.3.
  | **23.10.2022** | Update OpenJDK to 17.0.5_p8. Many minor alpine updates.

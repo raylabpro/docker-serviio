@@ -1,7 +1,7 @@
 # Serviio docker
 #
 # Run with: docker run --rm --name serviio -d -p 23423:23423/tcp -p 23424:23424/tcp -p 8895:8895/tcp -p 1900:1900/udp -v /etc/localtime:/etc/localtime:ro soerentsch/serviio
-ARG ALPINE_VERSION=3.16.2
+ARG ALPINE_VERSION=3.16.3
 
 FROM alpine:${ALPINE_VERSION}
 
@@ -9,7 +9,7 @@ ARG BUILD_DATE
 ARG BUILD_VCS_REF
 
 ARG SERVIIO_VERSION=2.3
-ARG JRE_PACKAGE=openjdk17-jre
+ARG JRE_PACKAGE=openjdk8-jre
 
 LABEL \
 	org.label-schema.build-date="${BUILD_DATE}" \
