@@ -59,6 +59,7 @@ Serviio serve DLNA over the default port `1900` with `UDP`, the media itself wil
 ## Container Changelog (dd.mm.yy)
  | Date | Changes |
  | ---- | ------- |
+ | **08.12.2022** | Added s390x support. Many minor alpine updates.
  | **23.11.2022** | Update alpine to 3.17.0
  | **16.11.2022** | Update alpine to 3.16.3
  | **27.10.2022** | Downgrade OpenJDK from 17 to 8 regarding of an i18n issue of Serviio 2.3.
