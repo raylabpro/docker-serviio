@@ -1,7 +1,7 @@
 # Serviio docker
 #
 # Run with: docker run --rm --name serviio -d -p 23423:23423/tcp -p 23424:23424/tcp -p 8895:8895/tcp -p 1900:1900/udp -v /etc/localtime:/etc/localtime:ro soerentsch/serviio
-ARG ALPINE_VERSION=3.17.1
+ARG ALPINE_VERSION=3.17.2
 
 FROM alpine:${ALPINE_VERSION}
 

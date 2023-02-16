@@ -29,7 +29,7 @@ Serviio serve DLNA over the default port `1900` with `UDP`, the media itself wil
 ## Container Settings
 ### Build Args
 
- - `ALPINE_VERSION` = 3.17.1
+ - `ALPINE_VERSION` = 3.17.2
  - `JASPER_VERSION` = 4.0.0
  - `SERVIIO_VERSION` = 2.3
  - `JRE_PACKAGE` = openjdk17-jre (openjdk8-jre for 32bit platforms)
@@ -60,6 +60,7 @@ Serviio serve DLNA over the default port `1900` with `UDP`, the media itself wil
 ## Container Changelog (dd.mm.yy)
  | Date | Changes |
  | ---- | ------- |
+ | **16.02.2023** | Update alpine to 3.17.2
  | **24.01.2023** | Update alpine to 3.17.1
  | **05.01.2022** | Update Jasper to 4.0.0.
  | **08.12.2022** | Added s390x support. Many minor alpine updates.
