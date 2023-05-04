@@ -9,7 +9,6 @@ ARG BUILD_DATE
 ARG BUILD_VCS_REF
 
 ARG SERVIIO_VERSION=2.3
-ARG JASPER_VERSION=4.0.0
 ARG JRE_PACKAGE=openjdk8-jre
 
 LABEL \
@@ -45,30 +44,16 @@ RUN set -ex \
 	&& apk update && apk upgrade \
 	&& apk add --no-cache --update \
 		ffmpeg \
+		jasper \
 		${JRE_PACKAGE} \ 
 	&& apk add --no-cache --update --virtual=.build-dependencies \
 		g++ \ 
-		cmake \
-		samurai \
+		jasper-dev \
 		lcms2-dev \ 
 ### Create WORKDIR and get all ingredients		
 	&& DIR=$(mktemp -d) && cd ${DIR} \
-	&& wget https://github.com/jasper-software/jasper/releases/download/version-${JASPER_VERSION}/jasper-${JASPER_VERSION}.tar.gz && tar xvf jasper-${JASPER_VERSION}.tar.gz \
 	&& wget https://raw.githubusercontent.com/soerentsch/dcraw/master/dcraw.c \
 	&& wget https://download.serviio.org/releases/serviio-${SERVIIO_VERSION}-linux.tar.gz && tar xvf serviio-${SERVIIO_VERSION}-linux.tar.gz \
-### Build Jasper	
-	&& cd ${DIR} \
-	&& cd jasper-${JASPER_VERSION} \
-	&& cmake -B build-jasper -G Ninja \
-		-DCMAKE_BUILD_TYPE=MinSizeRel \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=lib \
-		-DCMAKE_SKIP_RPATH=ON \
-		-DJAS_ENABLE_OPENGL=ON \
-		-DJAS_ENABLE_LIBJPEG=ON \
-		-DJAS_ENABLE_AUTOMATIC_DEPENDENCIES=OFF \
-	&& cmake --build build-jasper \
-	&& cmake --install build-jasper \
 ### Build dcraw	
 	&& cd ${DIR} \
 	&& gcc -o dcraw -O4 dcraw.c -lm -ljasper -ljpeg -llcms2 \
