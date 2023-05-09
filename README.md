@@ -30,7 +30,6 @@ Serviio serve DLNA over the default port `1900` with `UDP`, the media itself wil
 ### Build Args
 
  - `ALPINE_VERSION` = 3.17.3
- - `JASPER_VERSION` = 4.0.0
  - `SERVIIO_VERSION` = 2.3
  - `JRE_PACKAGE` = openjdk17-jre (openjdk8-jre for 32bit platforms)
 
@@ -60,6 +59,7 @@ Serviio serve DLNA over the default port `1900` with `UDP`, the media itself wil
 ## Container Changelog (dd.mm.yy)
  | Date | Changes |
  | ---- | ------- |
+ | **09.05.2023** | Switch back from own build to Alpine package for Jasper 4.0.0
  | **31.03.2023** | Update alpine to 3.17.3
  | **06.03.2023** | Update FFmpeg to 6.0. Many minor alpine updates.
  | **16.02.2023** | Update alpine to 3.17.2
