@@ -29,7 +29,7 @@ Serviio serve DLNA over the default port `1900` with `UDP`, the media itself wil
 ## Container Settings
 ### Build Args
 
- - `ALPINE_VERSION` = 3.19.0
+ - `ALPINE_VERSION` = 3.19.1
  - `SERVIIO_VERSION` = 2.3
  - `JRE_PACKAGE` = openjdk8-jre
 
@@ -59,6 +59,7 @@ Serviio serve DLNA over the default port `1900` with `UDP`, the media itself wil
 ## Container Changelog (dd.mm.yy)
  | Date | Changes |
  | ---- | ------- |
+ | **02.02.2024** | Update alpine to 3.19.1. Added ppc64le support.
  | **19.01.2024** | Update FFmpeg to 6.1. Many minor alpine updates.
  | **12.12.2023** | Update alpine to 3.19.0
  | **04.12.2023** | Update alpine to 3.18.5
