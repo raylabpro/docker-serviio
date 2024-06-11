@@ -30,8 +30,8 @@ Serviio serve DLNA over the default port `1900` with `UDP`, the media itself wil
 ### Build Args
 
  - `ALPINE_VERSION` = 3.20.0
- - `SERVIIO_VERSION` = 2.3
- - `JRE_PACKAGE` = openjdk8-jre
+ - `SERVIIO_VERSION` = 2.4
+ - `JRE_PACKAGE` = openjdk8-jre (32bit) / openjdk22-jre (64bit)
 
 ### Exposed Ports
 
@@ -45,7 +45,7 @@ Serviio serve DLNA over the default port `1900` with `UDP`, the media itself wil
  - `23524:23524/tcp` - HTTPS/1.1 /cds /mediabrowser
 
 ### Recomended Volumes (no auto mounting now)
- - `/opt/serviio/config`
+ - `/opt/serviio/config` - before the first use, you must copy the container files (docker cp)
  - `/opt/serviio/library`
  - `/opt/serviio/plugins`
  - `/opt/serviio/log`
@@ -54,12 +54,13 @@ Serviio serve DLNA over the default port `1900` with `UDP`, the media itself wil
 ## Platform differences
 ### JVM
  - 32bit Platforms (x86, 386, arm7) will use OpenJDK 8 (the latest OpenJDK with 32bit support).
- - 64bit Platforms (x86_64, amd64, aarch64, arm64, s390x) will use OpenJDK 17.
+ - 64bit Platforms (x86_64, amd64, aarch64, arm64, s390x) will use OpenJDK 22.
 
 ## Container Changelog (dd.mm.yy)
  | Date | Changes |
  | ---- | ------- |
- | **11.06.2024** | Update alpine to 3.20.0
+ | **11.06.2024** | Update Serviio to 2.4
+ | **11.06.2024** | Update alpine to 3.20.0 (Last Update with Serviio v2.3)
  | **02.04.2024** | Update xz package (fixed CVE-2024-3094). Many minor alpine updates.
  | **02.02.2024** | Update alpine to 3.19.1. Added ppc64le support.
  | **19.01.2024** | Update FFmpeg to 6.1. Many minor alpine updates.
